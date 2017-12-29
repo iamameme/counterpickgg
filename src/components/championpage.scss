@@ -1,0 +1,727 @@
+@font-face {
+  font-family: Timeless;
+  src: url(../fonts/Timeless-Bold.ttf);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+.lanebutton {
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0px 20px;
+  display: inline-block;
+  margin: 0px 15px;
+  text-transform: uppercase;
+  line-height: 2.7em;
+  letter-spacing: 1.5px;
+  font-size: 1em;
+  outline: none;
+  position: relative;
+  font-size: 16px;
+  border: 3px solid #fff;
+  background-color: transparent;
+  border-radius: 15px 15px 15px 15px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+
+@keyframes fadeoutstart {
+  0% {
+    background-color: #757575
+  }
+  100% {
+    background-color: rgba(0,0,0,.2)
+  }
+}
+
+.lanebutton-act {
+  background-color: transparent;
+  animation: .5s fadeoutstart;
+  animation-fill-mode: forwards;
+}
+
+
+.lanebutton-notact {
+  background-color: #7f7f7f;
+  animation: fadein .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+  0% {
+    background-color: rgba(0,0,0,.2)
+  }
+  100% {
+    background-color: #757575
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 17px;
+  height: 17px;
+}
+/* Background */
+::-webkit-scrollbar-track-piece {
+  background: transparent none;
+  border: solid 4px transparent;
+  border-right-width: 8px;
+  margin: 4px;
+}
+/* Bottom bar background */
+::-webkit-scrollbar-track-piece:horizontal {
+  border-right-width: 4px;
+  border-bottom-width: 8px;
+}
+/* Bar element (thumb) */
+::-webkit-scrollbar-thumb {
+  border: solid 0 transparent;
+  border-right-width: 5px;
+  border-left-width: 5px;
+  -webkit-border-radius: 9px 6px;
+  -webkit-box-shadow: inset 0 0 0 1px rgb(200,200,200), inset 0 0 0 6px rgb(200,200,200);
+}
+/* Darken rollover */
+::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow: inset 0 0 0 1px rgb(161,161,161), inset 0 0 0 6px rgb(161,161,161);
+}
+/* Horizontal thumb */
+::-webkit-scrollbar-thumb:horizontal {
+  border-right-width: 0;
+  border-left-width: 0;
+  border-top-width: 5px;
+  border-bottom-width: 5px;
+  -webkit-border-radius: 6px 9px;
+}
+/* Corner */
+::-webkit-scrollbar-corner { /*@todo*/ }
+
+#cssload-contain {
+  width: 146px;
+  height: 49px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0;
+  animation: fadeIn 1.15s 1;
+  -o-animation: fadeIn 1.15s 1;
+  -ms-animation: fadeIn 1.15s 1;
+  -webkit-animation: fadeIn 1.15s 1;
+  -moz-animation: fadeIn 1.15s 1;
+  animation-fill-mode: forwards;
+  -o-animation-fill-mode: forwards;
+  -ms-animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+}
+
+.cssload-wrap {
+  animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+  -o-animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+  -ms-animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+  -webkit-animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+  -moz-animation: translate 1150ms infinite ease-in-out alternate, zindex 2300ms infinite ease-in-out;
+  position: absolute;
+}
+
+.cssload-ball {
+  width: 49px;
+  height: 49px;
+  box-shadow: 0 -6.25px 0 rgba(0,0,0,0.15) inset;
+  background-image: url("https://vignette.wikia.nocookie.net/leagueoflegends/images/2/28/ProfileIcon0028.png/revision/latest?cb=20170504215222");
+  background-size: 50px 50px;
+  border-radius: 50%;
+  animation: scale 1150ms infinite ease-in-out alternate;
+  -o-animation: scale 1150ms infinite ease-in-out alternate;
+  -ms-animation: scale 1150ms infinite ease-in-out alternate;
+  -webkit-animation: scale 1150ms infinite ease-in-out alternate;
+  -moz-animation: scale 1150ms infinite ease-in-out alternate;
+  animation-delay: -575ms;
+  -o-animation-delay: -575ms;
+  -ms-animation-delay: -575ms;
+  -webkit-animation-delay: -575ms;
+  -moz-animation-delay: -575ms;
+  transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  border: 2px solid black;
+}
+
+.cssload-ball:after {
+  content: "";
+  width: 49px;
+  height: 13px;
+  background: rgba(238,238,238,.3);
+  position: absolute;
+  top: 68px;
+  border-radius: 50%;
+}
+
+#cssload-wrap2 {
+  animation-delay: -1150ms;
+  -o-animation-delay: -1150ms;
+  -ms-animation-delay: -1150ms;
+  -webkit-animation-delay: -1150ms;
+  -moz-animation-delay: -1150ms;
+}
+
+#cssload-ball2 {
+  background-image: url("https://vignette.wikia.nocookie.net/leagueoflegends/images/f/fa/ProfileIcon1114_Meowcon.png/revision/latest?cb=20170504230155");
+  background-size: 50px 50px;
+  animation-delay: -1725ms;
+  -o-animation-delay: -1725ms;
+  -ms-animation-delay: -1725ms;
+  -webkit-animation-delay: -1725ms;
+  -moz-animation-delay: -1725ms;
+}
+
+#cssload-wrap3 {
+  animation-delay: -1725ms;
+  -o-animation-delay: -1725ms;
+  -ms-animation-delay: -1725ms;
+  -webkit-animation-delay: -1725ms;
+  -moz-animation-delay: -1725ms;
+}
+
+#cssload-ball3 {
+  background-image: url("https://vignette.wikia.nocookie.net/leagueoflegends/images/f/ff/ProfileIcon0007.png/revision/latest?cb=20170504212214");
+  background-size: 50px 50px;
+  animation-delay: -2300ms;
+}
+
+#cssload-wrap4 {
+  animation-delay: -2875ms;
+  -o-animation-delay: -2875ms;
+  -ms-animation-delay: -2875ms;
+  -webkit-animation-delay: -2875ms;
+  -moz-animation-delay: -2875ms;
+}
+
+#cssload-ball4 {
+  background-image: url("https://vignette.wikia.nocookie.net/leagueoflegends/images/0/00/ProfileIcon0026.png/revision/latest?cb=20170517191655");
+  background-size: 50px 50px;
+  animation-delay: -3450ms;
+  -o-animation-delay: -3450ms;
+  -ms-animation-delay: -3450ms;
+  -webkit-animation-delay: -3450ms;
+  -moz-animation-delay: -3450ms;
+}
+
+
+
+
+
+
+@keyframes translate {
+  100% {
+    transform: translateX(97px);
+  }
+}
+
+@-o-keyframes translate {
+  100% {
+    -o-transform: translateX(97px);
+  }
+}
+
+@-ms-keyframes translate {
+  100% {
+    -ms-transform: translateX(97px);
+  }
+}
+
+@-webkit-keyframes translate {
+  100% {
+    -webkit-transform: translateX(97px);
+  }
+}
+
+@-moz-keyframes translate {
+  100% {
+    -moz-transform: translateX(97px);
+  }
+}
+
+@keyframes scale {
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-o-keyframes scale {
+  100% {
+    -o-transform: scale(1);
+  }
+}
+
+@-ms-keyframes scale {
+  100% {
+    -ms-transform: scale(1);
+  }
+}
+
+@-webkit-keyframes scale {
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@-moz-keyframes scale {
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+
+@keyframes zindex {
+  25% {
+    z-index: 1;
+  }
+  75% {
+    z-index: -1;
+  }
+}
+
+@-o-keyframes zindex {
+  25% {
+    z-index: 1;
+  }
+  75% {
+    z-index: -1;
+  }
+}
+
+@-ms-keyframes zindex {
+  25% {
+    z-index: 1;
+  }
+  75% {
+    z-index: -1;
+  }
+}
+
+@-webkit-keyframes zindex {
+  25% {
+    z-index: 1;
+  }
+  75% {
+    z-index: -1;
+  }
+}
+
+@-moz-keyframes zindex {
+  25% {
+    z-index: 1;
+  }
+  75% {
+    z-index: -1;
+  }
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+.loadingText {
+  animation: pulse 2s infinite;
+  animation-iteration-count: 30;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: .3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutIn {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSoft {
+  0% {
+    opacity: 0;
+    visibility: visible;
+    position: inherit;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutSoft {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
+
+.Modal {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  background-color: papayawhip;
+  z-index:1000000;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rebeccapurple;
+}
+
+.aStyle {
+  border-bottom: 2px solid transparent;
+  color: #c9aa71;
+  font-size: 14px;
+  line-height: 48px;
+  padding-top: 2px;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+  box-shadow: 0 0 0;
+}
+
+.nav-tabs>li>a:hover {
+  border-color: transparent !important;
+}
+
+.aStyle:active {
+  border-color: #c79a3c;
+  color: #fff;
+}
+
+.aStyleActive {
+  border-color: #c79a3c;
+  color: #fff;
+}
+
+.fadedTop {
+  content:'';
+  margin-top: -100px;
+  height: 40px;
+  width: 25%;
+  background: linear-gradient(to bottom, rgba(251, 251, 251, 1) 0%, rgba(251, 251, 251, 0) 100%);
+  position: absolute;
+}
+
+.lineImg {
+  vertical-align: middle;
+  width: 35%;
+  transform: rotate(180deg);
+  margin-top: -2.3px;
+  margin-right: 2px;
+}
+
+.lineBox {
+  position: relative;
+  background: #373121;
+  font-size: 0;
+  z-index: 100;
+  margin-right: 40px;
+  vertical-align:middle;
+}
+
+.lineBox:after {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: -6px;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: 1.3px solid #373121;
+  content: "\25C7";
+  font-size: 0;
+}
+
+.lineImg2 {
+  vertical-align: middle;
+  width: 35%;
+  transform: rotate(360deg);
+  padding-left: 11px;
+  margin-top: -2px;
+}
+
+.lineBox2 {
+  position: relative;
+  background: #373121;
+  font-size: 0;
+  z-index: 100;
+  margin-left: 40px;
+  vertical-align:middle;
+}
+
+.lineBox2:before {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: -6px;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: 1.3px solid #373121;
+  content: "\25C7";
+  font-size: 0;
+}
+
+.leagueButton {
+  border: 1px solid #7e633b;
+  background-color: #101217;
+  position: relative;
+  text-align: center;
+
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0px 20px;
+  display: inline-block;
+  margin: 0px 15px;
+  text-transform: uppercase;
+  line-height: 2.7em;
+  letter-spacing: 1.5px;
+  font-size: 1em;
+  outline: none;
+  font-size: 16px;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 15px 15px 15px 15px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+
+.lineImgVertical {
+  vertical-align: middle;
+  height: 35%;
+  transform: rotate(90deg);
+  padding-left: 11px;
+  margin-top: -2px;
+  z-index: 999999
+}
+
+.lineBoxVertical {
+  position: relative;
+  background: #373121;
+  font-size: 0;
+  z-index: 100;
+  margin-left: 40px;
+  vertical-align:middle;
+}
+
+.lineBoxVertical:after {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: -6px;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: 1.3px solid #373121;
+  content: "\25C7";
+  font-size: 0;
+}
+
+.lineBoxVertical:before {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  top: -6px;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border: 1.3px solid #373121;
+  content: "\25C7";
+  font-size: 0;
+}
+
+.championInTable:hover {
+  cursor: pointer;
+}
+
+.counterbox {
+  backgroundColor: red
+}
+
+
+@keyframes fadeInU {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    z-index: 100;
+  }
+}
+.backdrop {
+  animation-name: fadeInU;
+  animation-duration: .6s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    z-index: -100;
+  }
+}
+
+.PathButton__Circles {
+  top: 10%;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+}
+
+.PathButton__Circles .path-icon--moon {
+  cx: 50%;
+  cy: 50%;
+  r: 43%;
+  fill: none;
+  stroke-width: 2;
+  transform: translateY(6%);
+  transform-origin: 50% 50%;
+}
+
+.PathButton__Circles .moon-left {
+  transform: rotate(120deg) translateY(6%);
+}
+
+.PathButton__Circles .moon-right {
+  transform: rotate(240deg) translateY(6%);
+}
+
+.aLdwd {
+  overflow: visible;
+  width: 86px;
+  height: 86px;
+  position: absolute;
+  top: 8%;
+  left: 2.6%;
+}
+
+.runeBuild {
+  text-align: initial;
+}
+
