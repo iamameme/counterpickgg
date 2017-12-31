@@ -2,8 +2,10 @@ import React from 'react'
 import { browserHistory, Router, Route } from 'react-router'
 import { Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import championpage from './championpage.js'
+import championpage from '../routes/ChampionPage/championpage.js'
 import HomeView from '../routes/Home/components/HomeView.js'
+import FAQ from "../routes/FAQ/faq.js"
+import HowItWorks from "../routes/HowItWorks/howitworks"
 
 class App extends React.Component {
   static propTypes = {
@@ -21,7 +23,8 @@ class App extends React.Component {
         <div style={{ height: '100%' }}>
           <Router history={browserHistory} >
           <Route path="/" component={HomeView} />
-
+            <Route path='/faq' component={FAQ}/>
+            <Route path='/how-it-works' component={HowItWorks}/>
             <Route path='/MonkeyKing' component={championpage}/>
 <Route path='/Jax' component={championpage}/>
 <Route path='/Fiddlesticks' component={championpage}/>

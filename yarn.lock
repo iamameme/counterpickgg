@@ -4127,6 +4127,10 @@ merge-descriptors@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
 
+merge-images@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/merge-images/-/merge-images-1.0.7.tgz#f091466263f878d16d06c03cebc37ea97e9288ca"
+
 methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"

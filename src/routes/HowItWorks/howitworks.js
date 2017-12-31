@@ -1,27 +1,8 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
-import './HomeView.scss'
-import background from './background.jpg'
+import background from '../../components/background.jpg'
 import WebFont from 'webfontloader'
 
-
-var Radium = require('radium');
-var color = require('color');
-
-var getJSON = function(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    var status = xhr.status;
-    if (status === 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status, xhr.response);
-    }
-  };
-  xhr.send();
-};
 
 WebFont.load({
   google: {
@@ -162,10 +143,10 @@ class Navbar extends React.Component {
           <p style={logoStyle} className={'aStyle'} href="/">
             C|P
           </p>
-          <a style={aStyle} className={'aStyle aStyleActive'} href="/">
+          <a style={aStyle} className={'aStyle'} href="/">
             CHAMPIONS
           </a>
-          <a style={aStyle} className={'aStyle'} href="/how-it-works">
+          <a style={aStyle} className={'aStyle aStyleActive'} href="/how-it-works">
             HOW IT WORKS
           </a>
           <a style={aStyle} className={'aStyle'} href="/faq">
@@ -215,106 +196,6 @@ class CenterText extends React.Component {
 
 
 
-class Champion extends React.Component {
-  constructor(props) {
-  		super(props);
-  		this.championid = this.props.championid;
-  		this.championkey = this.props.championkey + ".png";
-  		switch (this.championkey) {
-  			case "Kayn.png":
-  				this.championkey = "https://i.imgur.com/QhlNJWg.png"
-  				break
-  			case "Ornn.png":
-  				this.championkey = "https://i.imgur.com/yk8lBP2.png"
-  				break
-  			default:
-  				this.championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/" + this.championkey;
-  		}
-  		this.championname = this.props.championkey;
-  		switch (this.championname) {
-        case 'AurelionSol':
-          this.championname = "Aurelion Sol"
-              break
-        case 'KogMaw':
-          this.championname = "Kog'Maw"
-              break
-        case 'MissFortune':
-          this.championname = "Miss Fortune"
-              break
-        case 'DrMundo':
-          this.championname = "Dr. Mundo"
-          break
-        case 'JarvanIV':
-          this.championname = "Jarvan IV"
-          break
-        case 'XinZhao':
-          this.championname = "Xin Zhao"
-          break
-        case 'MasterYi':
-          this.championname = "Master Yi"
-          break
-        case 'MonkeyKing':
-          this.championname = "Wukong"
-          break
-        case 'TwistedFate':
-          this.championname = "Twisted Fate"
-          break
-      }
-
-  		this.championimg = this.championkey;
-	}
-
-  render() {
-  	var style = {
-      height:60,
-      width:60
-    };
-  	var divStyle = {
-      margin: 20,
-      display:'inline-block'
-    };
-  	var textStyle = {
-  	  color: 'white',
-      paddingTop:'4px',
-      fontFamily:'Teko'
-    };
-    var champ = '/' + this.props.championkey;
-    var buttonStyle = {
-      border: 'none',
-      backgroundColor: 'transparent',
-      padding: '0px'
-    };
-
-    return (
-      <div style={divStyle}>
-      <a href={champ}>
-        <button style={buttonStyle}>
-          <img style={style} src={this.championimg} />
-          <p style={textStyle}>{this.championname}</p>
-        </button>
-      </a>
-    </div>);
-  }
-}
-
-class ChampionContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    var champions = require('../../../../league_data/champions.json')
-    this.champWinSort = [];
-    for (var i in champions['data']) {
-      var champ = champions['data'][i]['key'];
-      this.champWinSort.push(<Champion championid={champions['data'][i]['id']} championkey={champ} />)
-    }
-  }
-
-  render() {
-    return (<div>
-      <div>{this.champWinSort}</div>
-    </div>);
-  }
-}
 
 
 class MainWrapper extends React.Component {
@@ -340,30 +221,46 @@ class MainWrapper extends React.Component {
       margin: '0 auto'
     };
 
+    var p = {
+      color: 'white'
+    }
+
     return (
       <div style={page_style}>
         <Navbar/>
         <br/>
         <br/>
         <br/>
-        <img style={frontImgStyle} src={"https://i.imgur.com/13zKD6w.png"}/>
-        <div className={"fadeInUp"}>
-          <div style={centertext}>
-            <CenterText text={"Pick A Champion to Counter!"}/>
-          </div>
-          <div style={champbox} className={["champbox"].join(' ')}>
-            <ChampionContainer/>
-          </div>
-        </div>
+        <p style={p}>THIS ISN'T DONE YET IM SORRY I RAN OUT OF TIME IT WILL BE DONE BY ACTUAL RELEASE</p>
+        <p style={p}>I'm very tired from all the work I've put in this like the nerd I am :(</p>
+        <br/>
+        <p style={p}>So, I've been working feverishly on this and realized, I don't have time to actually make this</p>
+        <p style={p}>I'm an anime weaboo and I go to conventions like a nerd, and I've been working on this project every day instead of being with people</p>
+        <br/>
+        <p style={p}>But to get into how it works, let me break it down. (This will change on actual release)</p>
+        <br/>
+        <p style={p}>All of the data is done through some simple js files through node. One file gets all of the player IDs of every challenger and master player of each region. </p>
+        <p style={p}>The next file gets the account IDs of all of the player IDs. After that, it gets the recent matches of all of those players (last 20 games)</p>
+        <p style={p}>I then get the Game IDs for all of those. With those Game IDs, I get the data from those games, which, long story short, is structured</p>
+        <p style={p}>by getting the champion played, the enemy champion, and all of the build associated with that.</p>
+        <p style={p}>Then, all of the data is compiled. It scans through the ~500,000-1,000,000 games in the database that have been imported</p>
+        <p style={p}>and precompiles all the winrates, builds, and everything, so that isn't done on request.</p>
+        <p style={p}>Then all of it goes into one nice little JSON file.</p>
+        <br/>
+        <p style={p}>There's a lot more that goes into it (like how it gets the accounts of diamond players as it scans through matches, etc.), </p>
+        <p style={p}>but, who wants details. All of that is detailed on github</p>
+        <p style={p}>For now, crack a cold one, enjoy yourself, ponder your potential elo gains, and enjoy the new year.</p>
+        <p style={p}>Thank you,</p>
+        <p style={p}>Steven aka Stevie</p>
       </div>
     );
   }
 }
 
-export const HomeView = () => (
+export const HowItWorks = () => (
   <MainWrapper/>
 
 )
 
-export default HomeView
+export default HowItWorks
 

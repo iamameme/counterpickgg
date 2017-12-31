@@ -26,6 +26,7 @@
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "get-json": "^1.0.0",
+    "merge-images": "^1.0.7",
     "node-schedule": "^1.2.5",
     "object-assign": "^4.1.1",
     "pg": "^7.3.0",

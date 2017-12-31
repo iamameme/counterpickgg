@@ -1,115 +1,123 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
-import background from './background.jpg'
+import background from '../../components/background.jpg'
 import WebFont from 'webfontloader'
 import './championpage.scss'
-import ReactModal from 'react-modal';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.scss';
-import precisionBackground from '../../league_data/runesReforged/perkBackgrounds/8000.jpg';
-import dominationBackground from '../../league_data/runesReforged/perkBackgrounds/8100.jpg';
-import sorceryBackground from '../../league_data/runesReforged/perkBackgrounds/8200.jpg';
-import inspirationBackground from '../../league_data/runesReforged/perkBackgrounds/8300.jpg';
-import resolveBackground from '../../league_data/runesReforged/perkBackgrounds/8400.jpg';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.scss';
+import precisionBackground from '../../../league_data/runesReforged/perkBackgrounds/8000.jpg';
+import dominationBackground from '../../../league_data/runesReforged/perkBackgrounds/8100.jpg';
+import sorceryBackground from '../../../league_data/runesReforged/perkBackgrounds/8200.jpg';
+import inspirationBackground from '../../../league_data/runesReforged/perkBackgrounds/8300.jpg';
+import resolveBackground from '../../../league_data/runesReforged/perkBackgrounds/8400.jpg';
 
-import sorceryLeft from '../../league_data/runesReforged/backgrounds/sorceryleft.png';
-import sorceryRight from '../../league_data/runesReforged/backgrounds/sorceryright.png';
-
-import sorceryTopIcon from '../../league_data/runesReforged/perkStyle/8200.png';
 
 var mainRuneImages = {
   "8000": {
-    "left": require('../../league_data/runesReforged/backgrounds/precisionLeft.png'),
-    "right": require('../../league_data/runesReforged/backgrounds/precisionRight.png'),
-    "topIcon": require('../../league_data/runesReforged/perkStyle/8000.png')
+    "left": require('../../../league_data/runesReforged/backgrounds/precisionLeft.png'),
+    "right": require('../../../league_data/runesReforged/backgrounds/precisionRight.png'),
+    "topIcon": require('../../../league_data/runesReforged/perkStyle/8000.png')
   },
   "8100": {
-    "left": require('../../league_data/runesReforged/backgrounds/dominationLeft.png'),
-    "right": require('../../league_data/runesReforged/backgrounds/dominationRight.png'),
-    "topIcon": require('../../league_data/runesReforged/perkStyle/8100.png')
+    "left": require('../../../league_data/runesReforged/backgrounds/dominationLeft.png'),
+    "right": require('../../../league_data/runesReforged/backgrounds/dominationRight.png'),
+    "topIcon": require('../../../league_data/runesReforged/perkStyle/8100.png')
   },
   "8200": {
-    "left": require('../../league_data/runesReforged/backgrounds/sorceryleft.png'),
-    "right": require('../../league_data/runesReforged/backgrounds/sorceryright.png'),
-    "topIcon": require('../../league_data/runesReforged/perkStyle/8200.png')
+    "left": require('../../../league_data/runesReforged/backgrounds/sorceryleft.png'),
+    "right": require('../../../league_data/runesReforged/backgrounds/sorceryRight.png'),
+    "topIcon": require('../../../league_data/runesReforged/perkStyle/8200.png')
   },
   "8300": {
-    "left": require('../../league_data/runesReforged/backgrounds/inspirationLeft.png'),
-    "right": require('../../league_data/runesReforged/backgrounds/inspirationRight.png'),
-    "topIcon": require('../../league_data/runesReforged/perkStyle/8300.png')
+    "left": require('../../../league_data/runesReforged/backgrounds/inspirationLeft.png'),
+    "right": require('../../../league_data/runesReforged/backgrounds/inspirationRight.png'),
+    "topIcon": require('../../../league_data/runesReforged/perkStyle/8300.png')
   },
   "8400": {
-    "left": require('../../league_data/runesReforged/backgrounds/resolveLeft.png'),
-    "right": require('../../league_data/runesReforged/backgrounds/resolveRight.png'),
-    "topIcon": require('../../league_data/runesReforged/perkStyle/8400.png')
+    "left": require('../../../league_data/runesReforged/backgrounds/resolveLeft.png'),
+    "right": require('../../../league_data/runesReforged/backgrounds/resolveRight.png'),
+    "topIcon": require('../../../league_data/runesReforged/perkStyle/8400.png')
   }
 };
 
 var runeImages = {
-  "8005": require('../../league_data/runesReforged/perk/8005.png'),
-  "8008": require('../../league_data/runesReforged/perk/8008.png'),
-  "8014": require('../../league_data/runesReforged/perk/8014.png'),
-  "8017": require('../../league_data/runesReforged/perk/8017.png'),
-  "8021": require('../../league_data/runesReforged/perk/8021.png'),
-  "8105": require('../../league_data/runesReforged/perk/8105.png'),
-  "8112": require('../../league_data/runesReforged/perk/8112.png'),
-  "8120": require('../../league_data/runesReforged/perk/8120.png'),
-  "8124": require('../../league_data/runesReforged/perk/8124.png'),
-  "8126": require('../../league_data/runesReforged/perk/8126.png'),
-  "8128": require('../../league_data/runesReforged/perk/8128.png'),
-  "8134": require('../../league_data/runesReforged/perk/8134.png'),
-  "8135": require('../../league_data/runesReforged/perk/8135.png'),
-  "8136": require('../../league_data/runesReforged/perk/8136.png'),
-  "8138": require('../../league_data/runesReforged/perk/8138.png'),
-  "8139": require('../../league_data/runesReforged/perk/8139.png'),
-  "8143": require('../../league_data/runesReforged/perk/8143.png'),
-  "8210": require('../../league_data/runesReforged/perk/8210.png'),
-  "8214": require('../../league_data/runesReforged/perk/8214.png'),
-  "8224": require('../../league_data/runesReforged/perk/8224.png'),
-  "8226": require('../../league_data/runesReforged/perk/8226.png'),
-  "8229": require('../../league_data/runesReforged/perk/8229.png'),
-  "8230": require('../../league_data/runesReforged/perk/8230.png'),
-  "8232": require('../../league_data/runesReforged/perk/8232.png'),
-  "8233": require('../../league_data/runesReforged/perk/8233.png'),
-  "8234": require('../../league_data/runesReforged/perk/8234.png'),
-  "8236": require('../../league_data/runesReforged/perk/8236.png'),
-  "8237": require('../../league_data/runesReforged/perk/8237.png'),
-  "8242": require('../../league_data/runesReforged/perk/8242.png'),
-  "8243": require('../../league_data/runesReforged/perk/8243.png'),
-  "8299": require('../../league_data/runesReforged/perk/8299.png'),
-  "8304": require('../../league_data/runesReforged/perk/8304.png'),
-  "8306": require('../../league_data/runesReforged/perk/8306.png'),
-  "8313": require('../../league_data/runesReforged/perk/8313.png'),
-  "8316": require('../../league_data/runesReforged/perk/8316.png'),
-  "8321": require('../../league_data/runesReforged/perk/8321.png'),
-  "8326": require('../../league_data/runesReforged/perk/8326.png'),
-  "8339": require('../../league_data/runesReforged/perk/8339.png'),
-  "8345": require('../../league_data/runesReforged/perk/8345.png'),
-  "8347": require('../../league_data/runesReforged/perk/8347.png'),
-  "8351": require('../../league_data/runesReforged/perk/8351.png'),
-  "8359": require('../../league_data/runesReforged/perk/8359.png'),
-  "8410": require('../../league_data/runesReforged/perk/8410.png'),
-  "8429": require('../../league_data/runesReforged/perk/8429.png'),
-  "8430": require('../../league_data/runesReforged/perk/8430.png'),
-  "8435": require('../../league_data/runesReforged/perk/8435.png'),
-  "8437": require('../../league_data/runesReforged/perk/8437.png'),
-  "8439": require('../../league_data/runesReforged/perk/8439.png'),
-  "8444": require('../../league_data/runesReforged/perk/8444.png'),
-  "8446": require('../../league_data/runesReforged/perk/8446.png'),
-  "8451": require('../../league_data/runesReforged/perk/8451.png'),
-  "8453": require('../../league_data/runesReforged/perk/8453.png'),
-  "8463": require('../../league_data/runesReforged/perk/8463.png'),
-  "8465": require('../../league_data/runesReforged/perk/8465.png'),
-  "9101": require('../../league_data/runesReforged/perk/9101.png'),
-  "9103": require('../../league_data/runesReforged/perk/9103.png'),
-  "9104": require('../../league_data/runesReforged/perk/9104.png'),
-  "9105": require('../../league_data/runesReforged/perk/9105.png'),
-  "9111": require('../../league_data/runesReforged/perk/9111.png')
+  "8005": require('../../../league_data/runesReforged/perk/8005.png'),
+  "8008": require('../../../league_data/runesReforged/perk/8008.png'),
+  "8014": require('../../../league_data/runesReforged/perk/8014.png'),
+  "8017": require('../../../league_data/runesReforged/perk/8017.png'),
+  "8021": require('../../../league_data/runesReforged/perk/8021.png'),
+  "8105": require('../../../league_data/runesReforged/perk/8105.png'),
+  "8112": require('../../../league_data/runesReforged/perk/8112.png'),
+  "8120": require('../../../league_data/runesReforged/perk/8120.png'),
+  "8124": require('../../../league_data/runesReforged/perk/8124.png'),
+  "8126": require('../../../league_data/runesReforged/perk/8126.png'),
+  "8128": require('../../../league_data/runesReforged/perk/8128.png'),
+  "8134": require('../../../league_data/runesReforged/perk/8134.png'),
+  "8135": require('../../../league_data/runesReforged/perk/8135.png'),
+  "8136": require('../../../league_data/runesReforged/perk/8136.png'),
+  "8138": require('../../../league_data/runesReforged/perk/8138.png'),
+  "8139": require('../../../league_data/runesReforged/perk/8139.png'),
+  "8143": require('../../../league_data/runesReforged/perk/8143.png'),
+  "8210": require('../../../league_data/runesReforged/perk/8210.png'),
+  "8214": require('../../../league_data/runesReforged/perk/8214.png'),
+  "8224": require('../../../league_data/runesReforged/perk/8224.png'),
+  "8226": require('../../../league_data/runesReforged/perk/8226.png'),
+  "8229": require('../../../league_data/runesReforged/perk/8229.png'),
+  "8230": require('../../../league_data/runesReforged/perk/8230.png'),
+  "8232": require('../../../league_data/runesReforged/perk/8232.png'),
+  "8233": require('../../../league_data/runesReforged/perk/8233.png'),
+  "8234": require('../../../league_data/runesReforged/perk/8234.png'),
+  "8236": require('../../../league_data/runesReforged/perk/8236.png'),
+  "8237": require('../../../league_data/runesReforged/perk/8237.png'),
+  "8242": require('../../../league_data/runesReforged/perk/8242.png'),
+  "8243": require('../../../league_data/runesReforged/perk/8243.png'),
+  "8299": require('../../../league_data/runesReforged/perk/8299.png'),
+  "8304": require('../../../league_data/runesReforged/perk/8304.png'),
+  "8306": require('../../../league_data/runesReforged/perk/8306.png'),
+  "8313": require('../../../league_data/runesReforged/perk/8313.png'),
+  "8316": require('../../../league_data/runesReforged/perk/8316.png'),
+  "8321": require('../../../league_data/runesReforged/perk/8321.png'),
+  "8326": require('../../../league_data/runesReforged/perk/8326.png'),
+  "8339": require('../../../league_data/runesReforged/perk/8339.png'),
+  "8345": require('../../../league_data/runesReforged/perk/8345.png'),
+  "8347": require('../../../league_data/runesReforged/perk/8347.png'),
+  "8351": require('../../../league_data/runesReforged/perk/8351.png'),
+  "8359": require('../../../league_data/runesReforged/perk/8359.png'),
+  "8410": require('../../../league_data/runesReforged/perk/8410.png'),
+  "8429": require('../../../league_data/runesReforged/perk/8429.png'),
+  "8430": require('../../../league_data/runesReforged/perk/8430.png'),
+  "8435": require('../../../league_data/runesReforged/perk/8435.png'),
+  "8437": require('../../../league_data/runesReforged/perk/8437.png'),
+  "8439": require('../../../league_data/runesReforged/perk/8439.png'),
+  "8444": require('../../../league_data/runesReforged/perk/8444.png'),
+  "8446": require('../../../league_data/runesReforged/perk/8446.png'),
+  "8451": require('../../../league_data/runesReforged/perk/8451.png'),
+  "8453": require('../../../league_data/runesReforged/perk/8453.png'),
+  "8463": require('../../../league_data/runesReforged/perk/8463.png'),
+  "8465": require('../../../league_data/runesReforged/perk/8465.png'),
+  "9101": require('../../../league_data/runesReforged/perk/9101.png'),
+  "9103": require('../../../league_data/runesReforged/perk/9103.png'),
+  "9104": require('../../../league_data/runesReforged/perk/9104.png'),
+  "9105": require('../../../league_data/runesReforged/perk/9105.png'),
+  "9111": require('../../../league_data/runesReforged/perk/9111.png')
+};
+
+var summonerSpells = {
+  "1" : require('../../../league_data/summonerSpells/1.png'),
+  "3" : require('../../../league_data/summonerSpells/3.png'),
+  "4" : require('../../../league_data/summonerSpells/4.png'),
+  "6" : require('../../../league_data/summonerSpells/6.png'),
+  "7" : require('../../../league_data/summonerSpells/7.png'),
+  "11" : require('../../../league_data/summonerSpells/11.png'),
+  "12" : require('../../../league_data/summonerSpells/12.png'),
+  "13" : require('../../../league_data/summonerSpells/13.png'),
+  "14" : require('../../../league_data/summonerSpells/14.png'),
+  "21" : require('../../../league_data/summonerSpells/21.png')
 };
 
 
 
-var champions = require('../../league_data/champions.json');
-var runeJSON = require('../../league_data/runes.json');
+var champions = require('../../../league_data/champions.json');
+var runeJSON = require('../../../league_data/runes.json');
 
 var Radium = require('radium');
 var color = require('color');
@@ -132,10 +140,10 @@ var getJSON = function(url, callback) {
 getJSON('http://localhost:3000/api' + window.location.pathname + '/enemywinrates',
   function(err, data) {
     if (err !== null) {
-      console.log('Something went wrong: ' + err);
+      //console.log('Something went wrong: ' + err);
     } else {
       champWinRateData = data;
-      console.log(data);
+      //console.log(data);
     }
   });
 
@@ -291,6 +299,9 @@ class LaneContainer extends React.Component {
   }
 
   handleClick(e) {
+    if (e.target.innerHTML !== "Mid" && e.target.innerHTML !== "Top" && e.target.innerHTML !== "Jungle" && e.target.innerHTML !== "Marksman" && e.target.innerHTML !== "Support") {
+      return;
+    }
     var picked1 = [];
     var backgroundColor1 = [];
     var pickedLast = [];
@@ -385,7 +396,7 @@ class TopContainer extends React.Component {
     getJSON(url,
       function(err, data) {
         if (err !== null) {
-          console.log('Something went wrong: ' + err);
+          //console.log('Something went wrong: ' + err);
         } else {
           me.setState({championWinRate: (data["winrate"] * 100).toFixed(2)})
         }
@@ -486,15 +497,20 @@ class ChampionContainerSplit extends React.Component {
       lane = 'middle';
     }
 
+    if (champWinRateData["winrates"][lane] === undefined) {
+      return <p>:( No Data Found :(</p>;
+    }
+
     var champByWinRate = champWinRateData["winrates"][lane].map(function(x) {
       return x;
     });
+
     champByWinRate.sort(function(a, b) {
       return a.winrate - b.winrate;
     });
     var champByLossRate = [];
     for (var i = 0; i < champByWinRate.length; i++) {
-      console.log(champByWinRate[i]["champion"] + "----" + champByWinRate[i]["total"]);
+      //console.log(champByWinRate[i]["champion"] + "----" + champByWinRate[i]["total"]);
       if ('/' + champByWinRate[i]["champion"] == window.location.pathname) {
         champByWinRate.splice(i, 1);
         i--;
@@ -586,6 +602,14 @@ class ChampionContainerSplit extends React.Component {
       fontWeight: 400,
       fontSize: '1.7em'
     };
+
+    if (this.champWinSort.length === 0) {
+      this.champWinSort = ":( Not Enough Data :("
+    }
+
+    if (this.champLossSort.length === 0 ) {
+      this.champLossSort = ":( Not Enough Data :("
+    }
 
 
     return (
@@ -926,16 +950,16 @@ class Navbar extends React.Component {
     return (
       <div style={navStyle} >
         <div style={contentStyle}>
-          <p style={logoStyle} className={'aStyle'}>
+          <p style={logoStyle} className={'aStyle'} href="/">
             C|P
           </p>
-          <a style={aStyle} className={'aStyle aStyleActive'}>
+          <a style={aStyle} className={'aStyle aStyleActive'} href="/">
             CHAMPIONS
           </a>
-          <a style={aStyle} className={'aStyle'}>
-            DUDES
+          <a style={aStyle} className={'aStyle'} href="/how-it-works">
+            HOW IT WORKS
           </a>
-          <a style={aStyle} className={'aStyle'}>
+          <a style={aStyle} className={'aStyle'} href="/faq">
             FAQ
           </a>
         </div>
@@ -1003,10 +1027,17 @@ class LeagueButton extends React.Component {
       color : "inherit"
     };
 
+    var disabled;
+    if (this.props.disabled === true) {
+      disabled = true;
+    } else {
+      disabled = false;
+    }
+
     return (
       <div>
       <a href={this.props.href} style={aStyle}>
-      <button style={button} onClick={()=>this.props.passclick(this.props.champion,this.props.echampion)}>
+      <button disabled={disabled} style={button} onClick={()=>this.props.passclick(this.props.champion,this.props.echampion)}>
          {this.props.text}
           {this.props.children}
       </button>
@@ -1039,7 +1070,7 @@ class QuickBuild extends React.Component {
   }
 
   render() {
-    console.log(this.champWinRateData);
+    //console.log(this.champWinRateData);
     var toptext = "Pick a Lane!";
     if (this.props.lane != 'none' && this.props.lane != 'loading') {
       toptext = "Quick Build for " + this.props.lane;
@@ -1139,9 +1170,10 @@ class ModalChampion extends React.Component {
             <p style={pStyle}>{echampName} Build</p>
             <p style={vsStyle}> vs </p>
             <p style={pStyle}>{champName}</p>
+            <p style={pStyle}>COMING SOON!</p>
           </div>
           <br/>
-          <LeagueButton text={"GET BUILD!"} color={'#b2d9db'} width={'300px'} backgroundColor={'#1e2328'} passclick={this.props.passclick} champion={this.props.clickedChamp} echampion={champKey} />
+          <LeagueButton text={"GET BUILD!"} color={'#b2d9db'} width={'300px'} backgroundColor={'#1e2328'} passclick={this.props.passclick} champion={this.props.clickedChamp} echampion={champKey} disabled={true} />
         </div>
       </Modal>
     );
@@ -1179,6 +1211,16 @@ class BuildContainer extends React.Component {
     this.forceUpdate();
   }
 
+  resize = () => this.forceUpdate()
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
+  }
+
   render() {
     if (this.props.notshow === true) {
       return false;
@@ -1186,7 +1228,7 @@ class BuildContainer extends React.Component {
 
     this.loadingContainer = {
       opacity: 1,
-      height:'100%',
+      height:'130%',
       width:'85%',
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       margin: '0 auto 30px',
@@ -1198,7 +1240,7 @@ class BuildContainer extends React.Component {
 
     this.afterl = {
       opacity: 0,
-      height:'90%',
+      height:'65%',
       width:'100%',
       animation: 'fadeIn 0.75s forwards'
     };
@@ -1328,7 +1370,7 @@ class BuildContainer extends React.Component {
     }
 
     var titleStyle = {
-      fontSize: '1em',
+      fontSize: '1.5vw',
       textDecoration: 'underline',
       color: '#dbfbfc'
     };
@@ -1345,13 +1387,12 @@ class BuildContainer extends React.Component {
       display: 'list-item'
     };
 
-    console.log(summoners);
     var build1 = <Build runes={runes[0]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var build2 = <Build runes={runes[1]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var build3 = <Build runes={runes[2]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var chosenBuild;
 
-    var buildButton1 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+    var buildButton1 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
     var buildButton2 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
     var buildButton3 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
 
@@ -1377,7 +1418,7 @@ class BuildContainer extends React.Component {
 
     var tabContent = {
       width: '100%',
-      height: '90%'
+      height: '100%'
     };
 
     var nav = {
@@ -1405,6 +1446,7 @@ class BuildContainer extends React.Component {
           <div style={tabContent}>
             {chosenBuild}
           </div>
+          <BuildBottom items={items} summoners={summoners} />
       </div>
 
     </div>);
@@ -1428,7 +1470,7 @@ class Build extends React.Component {
       zIndex: 0,
       position: 'relative',
       width: '100%',
-      height: '100%'
+      height: '105%'
     };
     var runeInnerFrame = {
       display: 'flex',
@@ -1436,7 +1478,7 @@ class Build extends React.Component {
       padding: '30px 20px',
       backgroundPosition: 'right center',
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+      backgroundSize: '115%',
       position: 'relative',
       width: '100%',
       height: '100%'
@@ -1455,110 +1497,45 @@ class Build extends React.Component {
       transition: '0.3s',
       opacity: 1,
       backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover'
+      backgroundSize: '120%'
     };
 
-    console.log(this.props.runes);
     var keystone = this.props.runes["keystone"];
     var leftBackground, rightBackground, topIcon;
+    var titleFillMain, titleFillSub;
 
     switch(getRuneType(keystone)) {
       case "8000":
         background["backgroundImage"] = 'url(' + precisionBackground + ')';
         leftBackground = mainRuneImages["8000"]["left"];
         topIcon = mainRuneImages["8000"]["topIcon"];
+        titleFillMain = '#c8aa6e';
         break;
       case "8100":
         background["backgroundImage"] = 'url(' + dominationBackground + ')';
         leftBackground = mainRuneImages["8100"]["left"];
         topIcon = mainRuneImages["8100"]["topIcon"];
+        titleFillMain = '#d44242';
         break;
       case '8200':
         background["backgroundImage"] = 'url(' + sorceryBackground + ')';
         leftBackground = mainRuneImages["8200"]["left"];
         topIcon = mainRuneImages["8200"]["topIcon"];
+        titleFillMain = '#9faafc';
         break;
       case '8300':
         background["backgroundImage"] = 'url(' + inspirationBackground + ')';
         leftBackground = mainRuneImages["8300"]["left"];
         topIcon = mainRuneImages["8300"]["topIcon"];
+        titleFillMain = '#49aab9';
         break;
       case '8400':
         background["backgroundImage"] = 'url(' + resolveBackground + ')';
         leftBackground = mainRuneImages["8400"]["left"];
         topIcon = mainRuneImages["8400"]["topIcon"];
+        titleFillMain = '#a1d586';
         break;
     }
-
-    var leftStyle = {
-      height: '74%',
-      position: 'absolute',
-      top: '7%',
-      left: '5%'
-    };
-
-    var rightStyle = {
-      height: '41.5%',
-      position: 'absolute',
-      left: '42%',
-      top: '7.2%'
-    };
-
-    var rune0Style = {
-      position: 'absolute',
-      top: '19.9%',
-      left: '1.7%',
-      height: '20%'
-    };
-
-    var rune1Style = {
-      position: 'absolute',
-      top: '42.9%',
-      left: '6.5%',
-      height: '6.5%'
-    };
-
-    var rune2Style = {
-      position: 'absolute',
-      top: '58.6%',
-      left: '6.5%',
-      height: '6.5%'
-    };
-
-    var rune3Style = {
-      position: 'absolute',
-      top: '74.2%',
-      left: '6.5%',
-      height: '6.5%'
-    };
-
-    var rune4Style = {
-      position: 'absolute',
-      top: '25.4%',
-      left: '43.6%',
-      height: '6.2%'
-    };
-
-    var rune5Style = {
-      position: 'absolute',
-      top: '42.1%',
-      left: '43.6%',
-      height: '6.2%'
-    };
-
-    var runeTopLeft = {
-      position: 'absolute',
-      top: '8.8%',
-      left: '6.6%',
-      height: '6.2%'
-    };
-
-    var runeTopRight = {
-      position: 'absolute',
-      top: '8.8%',
-      left: '43.7%',
-      height: '6%'
-    };
 
     function ifRuneInSameTree(runeMain, firstRune, secondRune, thirdRune) {
 
@@ -1662,51 +1639,373 @@ class Build extends React.Component {
       subRunes.push(runes["runesSub"][i][0]);
     }
 
-    var mainRunes = getValidRuneBuild(mainRunes, "main"), subRunes = getValidRuneBuild(subRunes, "sub"), topIcon2;
+    mainRunes = getValidRuneBuild(mainRunes, "main");
+    subRunes = getValidRuneBuild(subRunes, "sub");
+
+    var mainRuneDescriptions = [], subRuneDescriptions = [], mainRuneTitles = [], subRuneTitles = [], topIcon2, keystoneDescription, keystoneTitle;
+    for (var z = 0; z < mainRunes.length; z++) {
+      for (var i = 0; i < runeJSON.length; i++) {
+        if (runeJSON[i]["id"].toString() === getRuneType(mainRunes[z])) {
+          for (var h = 0; h < runeJSON[i]["slots"].length; h++) {
+            for (var j = 0; j < runeJSON[i]["slots"][h]["runes"].length; j++) {
+              if (runeJSON[i]["slots"][h]["runes"][j]["id"].toString() === mainRunes[z].toString()) {
+                mainRuneDescriptions.push(runeJSON[i]["slots"][h]["runes"][j]["shortDesc"]);
+                mainRuneTitles.push(runeJSON[i]["slots"][h]["runes"][j]["name"]);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    for (var z = 0; z < subRunes.length; z++) {
+      for (var i = 0; i < runeJSON.length; i++) {
+        if (runeJSON[i]["id"].toString() === getRuneType(subRunes[z])) {
+          for (var h = 0; h < runeJSON[i]["slots"].length; h++) {
+            for (var j = 0; j < runeJSON[i]["slots"][h]["runes"].length; j++) {
+              if (runeJSON[i]["slots"][h]["runes"][j]["id"].toString() === subRunes[z].toString()) {
+                subRuneDescriptions.push(runeJSON[i]["slots"][h]["runes"][j]["shortDesc"]);
+                subRuneTitles.push(runeJSON[i]["slots"][h]["runes"][j]["name"]);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    for (var i = 0; i < runeJSON.length; i++) {
+      if (runeJSON[i]["id"].toString() === getRuneType(keystone)) {
+        for (var h = 0; h < runeJSON[i]["slots"].length; h++) {
+          for (var j = 0; j < runeJSON[i]["slots"][h]["runes"].length; j++) {
+            if (runeJSON[i]["slots"][h]["runes"][j]["id"].toString() === keystone.toString()) {
+              keystoneDescription = runeJSON[i]["slots"][h]["runes"][j]["shortDesc"];
+              keystoneTitle = runeJSON[i]["slots"][h]["runes"][j]["name"];
+            }
+          }
+        }
+      }
+    }
 
     switch(getRuneType(subRunes[0])) {
       case "8000":
         rightBackground = mainRuneImages["8000"]["right"];
         topIcon2 = mainRuneImages["8000"]["topIcon"];
+        titleFillSub = '#c8aa6e';
         break;
       case "8100":
         rightBackground = mainRuneImages["8100"]["right"];
         topIcon2 = mainRuneImages["8100"]["topIcon"];
+        titleFillSub = '#d44242';
         break;
       case '8200':
         rightBackground = mainRuneImages["8200"]["right"];
         topIcon2 = mainRuneImages["8200"]["topIcon"];
+        titleFillSub = '#9faafc';
         break;
       case '8300':
         rightBackground = mainRuneImages["8300"]["right"];
         topIcon2 = mainRuneImages["8300"]["topIcon"];
+        titleFillSub = '#49aab9';
         break;
       case '8400':
         rightBackground = mainRuneImages["8400"]["right"];
         topIcon2 = mainRuneImages["8400"]["topIcon"];
+        titleFillSub = '#a1d586';
         break;
     }
+
+    var svg1 = {
+      marginLeft: '5%',
+      marginTop: '5%',
+      height: (window.innerWidth * .4),
+      float: 'left'
+    };
+
+    var svg2 = {
+      height: (window.innerWidth * .27),
+      float: 'left',
+      marginLeft: '5%',
+      marginTop: '5%'
+    };
+
+    var temp = {
+      fontSize: '30px',
+      fontFamily: 'Timeless-Light',
+      lineHeight: '30px',
+      letterSpacing: '1px',
+      color: '#a09b8c'
+    };
 
     return (
         <div style={runeOuterFrame}>
           <div style={runeInnerFrame}>
             <div style={background}>
               <div className={"runeBuild"}>
-                <img style={runeTopLeft} src={topIcon} />
-                <img style={runeTopRight} src={topIcon2} />
-                <img style={leftStyle} src={leftBackground} alt="" />
-                <img style={rightStyle} src={rightBackground} alt="" />
-                <img style={rune0Style} src={ runeImages[runes["keystone"]] } />
-                <img style={rune1Style} src={ runeImages[mainRunes[0]] } />
-                <img style={rune2Style} src={ runeImages[mainRunes[1]] } />
-                <img style={rune3Style} src={ runeImages[mainRunes[2]] } />
-                <img style={rune4Style} src={ runeImages[subRunes[0]] } />
-                <img style={rune5Style} src={ runeImages[subRunes[1]] } />
+                <svg style={svg1} viewBox="0 0 800 1200">
+                  <image x="0" y="0" height={"1200px"} xlinkHref={leftBackground} />
+                  <image x="45" y="40" xlinkHref={topIcon} />
+                  <image x="-42" y="228" xlinkHref={runeImages[runes["keystone"]]} />
+                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="296">{keystoneTitle}</text>
+                    <foreignObject x="230" y="316" width="520" height="220">
+                      <p style={temp}>{keystoneDescription}</p>
+                    </foreignObject>
+                  <image x="32" y="580" xlinkHref={runeImages[mainRunes[0]]} />
+                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="610">{mainRuneTitles[0]}</text>
+                    <foreignObject x="230" y="630" width="520" height="220">
+                      <p style={temp} >{mainRuneDescriptions[0]}</p>
+                    </foreignObject>
+                  <image x="32" y="834" xlinkHref={runeImages[mainRunes[1]]} />
+                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="870">{mainRuneTitles[1]}</text>
+                    <foreignObject x="230" y="890" width="520" height="220">
+                      <p style={temp} >{mainRuneDescriptions[1]}</p>
+                    </foreignObject>
+                  <image x="32" y="1085" xlinkHref={runeImages[mainRunes[2]]} />
+                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="1120">{mainRuneTitles[2]}</text>
+                    <foreignObject x="230" y="1140" width="520" height="220">
+                      <p style={temp} >{mainRuneDescriptions[2]}</p>
+                    </foreignObject>
+                </svg>
+                <svg style={svg2} viewBox="0 0 800 800">
+                  <image x="0" y="0" height={"680px"} xlinkHref={rightBackground} />
+                  <image x="42" y="40" xlinkHref={topIcon2} />
+                  <image x="32" y="296" xlinkHref={runeImages[subRunes[0]]} />
+                    <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="316">{subRuneTitles[0]}</text>
+                    <foreignObject x="230" y="336" width="520" height="220">
+                      <p style={temp}>{subRuneDescriptions[0]}</p>
+                    </foreignObject>
+                  <image x="32" y="568" xlinkHref={runeImages[subRunes[1]]} />
+                    <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="590">{subRuneTitles[1]}</text>
+                    <foreignObject x="230" y="610" width="520" height="220">
+                      <p style={temp}>{subRuneDescriptions[1]}</p>
+                    </foreignObject>
+                </svg>
               </div>
             </div>
           </div>
         </div>
       );
+  }
+}
+
+class BuildBottom extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    function filterItems(items) {
+      var newItems = items, finalItems = [], ifBoots = false;
+      for (var i = 0; i < newItems.length; i++) {
+        var firstTwo = newItems[i][0].substr(0,2);
+        if (firstTwo === "10" || firstTwo === "0" || newItems[i][0] === "2003" || newItems[i][0] === "2032" || newItems[i][0] === "2031") {
+        } else {
+          var boot = false;
+          switch (newItems[i]) {
+            case "3006":
+            case "3047":
+            case "3117":
+            case "3009":
+            case "3020":
+            case "3111":
+              boot = true;
+              break;
+            default:
+              break;
+          }
+          if (ifBoots === false) {
+            finalItems.push(newItems[i]);
+            if (boot === true) {
+              ifBoots = true;
+            }
+          } else {
+            if (boot === false) {
+              finalItems.push(newItems[i]);
+            }
+          }
+        }
+      }
+
+      return finalItems;
+    }
+
+    var runeOuterFrame = {
+      padding: '2px',
+      margin: '2em 0 1em',
+      background: 'linear-gradient(0deg, #6c5021 0%, #ab8f57 100%)',
+      boxShadow: '0 0 80px #000',
+      zIndex: 0,
+      position: 'relative',
+      width: '100%',
+      height: '20%',
+      marginTop: '5%',
+      marginBottom: '5%'
+    };
+    var runeInnerFrame = {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '30px 20px',
+      backgroundPosition: 'right center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    };
+    var background = {
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      zIndex: '-2',
+      pointerEvents: 'none',
+      userSelect: 'none',
+      willChange: 'transform',
+      transition: '0.3s',
+      opacity: 1,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundColor: 'black'
+    };
+
+    var itemBox = {
+      width: "50%",
+      height: '100%',
+      float: 'left',
+      verticalAlign: 'middle'
+    };
+
+    var itemContainer = {
+      margin: '0 auto',
+      width: '100%'
+    };
+
+    var itemText = {
+      fontFamily: 'Timeless',
+      textTransform: 'uppercase',
+      letterSpacing: '1px',
+      color: '#d8cfbd',
+      fontSize: '1.5vw'
+    };
+
+    var items = filterItems(this.props.items);
+    var summonerView = [], total = 0;
+
+    for (var i = 0; i < this.props.summoners.length; i++) {
+      if (this.props.summoners[i] > 0) {
+        total += this.props.summoners[i];
+      }
+    }
+
+    for (var i = 0; i < this.props.summoners.length; i++) {
+      if (this.props.summoners[i] > 0) {
+        this.props.summoners[i] = ((this.props.summoners[i] / total) * 100);
+        summonerView.push(<ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={""} summoner={[i,this.props.summoners[i]]}  />);
+      }
+    }
+
+    return (
+      <div style={runeOuterFrame}>
+        <div style={runeInnerFrame}>
+          <div style={background}>
+            <div style={itemBox}>
+              <h3 style={itemText}>MOST BUILT ITEMS</h3>
+                <div style={itemContainer}>
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[0][0]} />
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[1][0]} />
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[2][0]} />
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[3][0]} />
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[4][0]} />
+                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[5][0]} />
+                 </div>
+            </div>
+            <div style={itemBox}>
+              <h3 style={itemText}>MOST POPULAR SUMMONERS</h3>
+              <div style={itemContainer}>
+                {summonerView}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class ImageBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    var runeOuterFrame = {
+      padding: '1px',
+      marginLeft: '1%',
+      marginRight: '1%',
+      background: 'linear-gradient(0deg, #6c5021 0%, #ab8f57 100%)',
+      boxShadow: '0 0 80px #000',
+      zIndex: 0,
+      position: 'relative',
+      width: this.props.width,
+      height: this.props.height,
+      display: 'inline-block'
+    };
+    var runeInnerFrame = {
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundPosition: 'right center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    };
+    var background = {
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      zIndex: '-2',
+      pointerEvents: 'none',
+      userSelect: 'none',
+      willChange: 'transform',
+      transition: '0.3s',
+      opacity: 1,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundColor: 'black'
+    };
+
+    var percentageText = {
+      position: 'absolute',
+      top: '120%',
+      fontFamily: 'Timeless',
+      color: '#d8cfbd',
+      fontSize: '1vw',
+      left: '10%'
+    };
+
+    var text;
+    if (this.props.item !== "") {
+      background["backgroundImage"] = 'url(http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/' + this.props.item + '.png)';
+    } else {
+      background["backgroundImage"] = 'url(' + summonerSpells[this.props.summoner[0]] + ')';
+      text = <p style={percentageText}>{this.props.summoner[1].toFixed(2) + "%"}</p>;
+    }
+
+    return (
+      <div style={runeOuterFrame}>
+        <div style={runeInnerFrame}>
+          <div style={background}>
+            {text}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -1782,7 +2081,6 @@ class MainWrapper extends React.Component {
         </div>
         <BottomContainer show={this.state.showChampList} lane={this.state.pickedLane} championClick={this.handleClickChampion} />
         <BuildContainer notshow={this.state.showChampList} lane={this.state.pickedLane} champ={this.state.champ} echamp={this.state.echamp} />
-
       </div>
     );
   }

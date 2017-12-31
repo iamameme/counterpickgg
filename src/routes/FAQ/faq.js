@@ -1,27 +1,8 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
-import './HomeView.scss'
-import background from './background.jpg'
+import background from '../../components/background.jpg'
 import WebFont from 'webfontloader'
 
-
-var Radium = require('radium');
-var color = require('color');
-
-var getJSON = function(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    var status = xhr.status;
-    if (status === 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status, xhr.response);
-    }
-  };
-  xhr.send();
-};
 
 WebFont.load({
   google: {
@@ -162,13 +143,13 @@ class Navbar extends React.Component {
           <p style={logoStyle} className={'aStyle'} href="/">
             C|P
           </p>
-          <a style={aStyle} className={'aStyle aStyleActive'} href="/">
+          <a style={aStyle} className={'aStyle'} href="/">
             CHAMPIONS
           </a>
           <a style={aStyle} className={'aStyle'} href="/how-it-works">
             HOW IT WORKS
           </a>
-          <a style={aStyle} className={'aStyle'} href="/faq">
+          <a style={aStyle} className={'aStyle aStyleActive'} href="/faq">
             FAQ
           </a>
         </div>
@@ -215,106 +196,6 @@ class CenterText extends React.Component {
 
 
 
-class Champion extends React.Component {
-  constructor(props) {
-  		super(props);
-  		this.championid = this.props.championid;
-  		this.championkey = this.props.championkey + ".png";
-  		switch (this.championkey) {
-  			case "Kayn.png":
-  				this.championkey = "https://i.imgur.com/QhlNJWg.png"
-  				break
-  			case "Ornn.png":
-  				this.championkey = "https://i.imgur.com/yk8lBP2.png"
-  				break
-  			default:
-  				this.championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/" + this.championkey;
-  		}
-  		this.championname = this.props.championkey;
-  		switch (this.championname) {
-        case 'AurelionSol':
-          this.championname = "Aurelion Sol"
-              break
-        case 'KogMaw':
-          this.championname = "Kog'Maw"
-              break
-        case 'MissFortune':
-          this.championname = "Miss Fortune"
-              break
-        case 'DrMundo':
-          this.championname = "Dr. Mundo"
-          break
-        case 'JarvanIV':
-          this.championname = "Jarvan IV"
-          break
-        case 'XinZhao':
-          this.championname = "Xin Zhao"
-          break
-        case 'MasterYi':
-          this.championname = "Master Yi"
-          break
-        case 'MonkeyKing':
-          this.championname = "Wukong"
-          break
-        case 'TwistedFate':
-          this.championname = "Twisted Fate"
-          break
-      }
-
-  		this.championimg = this.championkey;
-	}
-
-  render() {
-  	var style = {
-      height:60,
-      width:60
-    };
-  	var divStyle = {
-      margin: 20,
-      display:'inline-block'
-    };
-  	var textStyle = {
-  	  color: 'white',
-      paddingTop:'4px',
-      fontFamily:'Teko'
-    };
-    var champ = '/' + this.props.championkey;
-    var buttonStyle = {
-      border: 'none',
-      backgroundColor: 'transparent',
-      padding: '0px'
-    };
-
-    return (
-      <div style={divStyle}>
-      <a href={champ}>
-        <button style={buttonStyle}>
-          <img style={style} src={this.championimg} />
-          <p style={textStyle}>{this.championname}</p>
-        </button>
-      </a>
-    </div>);
-  }
-}
-
-class ChampionContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    var champions = require('../../../../league_data/champions.json')
-    this.champWinSort = [];
-    for (var i in champions['data']) {
-      var champ = champions['data'][i]['key'];
-      this.champWinSort.push(<Champion championid={champions['data'][i]['id']} championkey={champ} />)
-    }
-  }
-
-  render() {
-    return (<div>
-      <div>{this.champWinSort}</div>
-    </div>);
-  }
-}
 
 
 class MainWrapper extends React.Component {
@@ -340,30 +221,32 @@ class MainWrapper extends React.Component {
       margin: '0 auto'
     };
 
+    var p = {
+      color: 'white'
+    }
+
     return (
       <div style={page_style}>
         <Navbar/>
         <br/>
         <br/>
         <br/>
-        <img style={frontImgStyle} src={"https://i.imgur.com/13zKD6w.png"}/>
-        <div className={"fadeInUp"}>
-          <div style={centertext}>
-            <CenterText text={"Pick A Champion to Counter!"}/>
-          </div>
-          <div style={champbox} className={["champbox"].join(' ')}>
-            <ChampionContainer/>
-          </div>
-        </div>
+        <p style={p}>Thanks for stopping by. I greatly appreciate it! This is the pet project of boy named Steven Barsam.</p>
+        <p style={p}>I always thought to myself, "Man, I'm not that smart. This build tells me to build Spirit Visage first</p>
+        <p style={p}>on my main Aatrox, but I'm going against a Gankplank. Should I still do that?? What do I do??</p>
+        <p style={p}>I wish there was a site that just told me what to build for each matchup because I'm too dumb."</p>
+        <br/>
+        <p style={p}>So I did it</p>
+        <p style={p}>PS: Also this is like, pre-alpha build so plz no judge. I know it looks bad. I'm trying to improve but it takes a while haha. One man. One dream.</p>
       </div>
     );
   }
 }
 
-export const HomeView = () => (
+export const FAQ = () => (
   <MainWrapper/>
 
 )
 
-export default HomeView
+export default FAQ
 
