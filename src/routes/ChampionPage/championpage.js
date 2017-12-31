@@ -3,7 +3,7 @@ import { IndexLink, Link } from 'react-router'
 import background from '../../components/background.jpg'
 import WebFont from 'webfontloader'
 import './championpage.scss'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.scss';
+import '../../styles/bootstrap/dist/css/bootstrap.min.scss';
 import precisionBackground from '../../../league_data/runesReforged/perkBackgrounds/8000.jpg';
 import dominationBackground from '../../../league_data/runesReforged/perkBackgrounds/8100.jpg';
 import sorceryBackground from '../../../league_data/runesReforged/perkBackgrounds/8200.jpg';
@@ -372,9 +372,9 @@ switch (championkey) {
     championkey = "https://i.imgur.com/yk8lBP2.png";
     break;
   case "Wukong.png":
-    championkey = "https://ddragon.leagueoflegends.com/cdn/7.10.1/img/champion/MonkeyKing.png";
+    championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/MonkeyKing.png";
   default:
-    championkey = "https://ddragon.leagueoflegends.com/cdn/7.10.1/img/champion/" + championkey;
+    championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/" + championkey;
 }
 var description, championId;
 for (var i in champions["data"]) {
@@ -979,11 +979,15 @@ class CenterText extends React.Component {
       paddingLeft: '12px'
     };
 
+    var imgStyle = {
+      width: '20%'
+    };
+
     return (
       <h4 style={h4}>
         <span>
           <span>
-           <img className={'lineImg'} src="https://universe.leagueoflegends.com/images/line.png" />
+           <img style={imgStyle} className={'lineImg'} src="https://universe.leagueoflegends.com/images/line.png" />
           </span>
           <span className={'lineBox'}></span>
         </span>
@@ -991,7 +995,7 @@ class CenterText extends React.Component {
         <span>
           <span className={'lineBox2'}></span>
           <span>
-           <img className={'lineImg2'} src="https://universe.leagueoflegends.com/images/line.png" />
+           <img style={imgStyle} className={'lineImg2'} src="https://universe.leagueoflegends.com/images/line.png" />
           </span>
         </span>
       </h4>
@@ -1071,7 +1075,7 @@ class QuickBuild extends React.Component {
 
   render() {
     //console.log(this.champWinRateData);
-    var toptext = "Pick a Lane!";
+    var toptext = "Pick a Lane to Get Counters and Builds!";
     if (this.props.lane != 'none' && this.props.lane != 'loading') {
       toptext = "Quick Build for " + this.props.lane;
     }
@@ -2072,7 +2076,7 @@ class MainWrapper extends React.Component {
         <TopContainer/>
       </div>
         <div style={centertext}>
-          <CenterText text={"Pick Lane to Counter!"}/>
+          <CenterText text={"Pick Lane to Get Counter Builds"}/>
         </div>
       <div style={boxTop} className={"champbox"}>
         <div style={laneBox}>

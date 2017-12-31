@@ -1,22 +1,11 @@
-const express = require('express')
-const path = require('path')
-const webpack = require('webpack')
-const logger = require('../build/lib/logger')
-const webpackConfig = require('../build/webpack.config')
-const project = require('../project.config')
-const compress = require('compression')
 
 var apiservice = require('./apiservice')
 var league = require('../league_data/champions.json')
-const db = require('../db')
-const pg = require('pg');
 const { Client } = require('pg')
 const client = new Client()
 client.connect();
-var https = require('https');
 
 var lanes = ['middle', 'bottom', 'support', 'top', 'jungle'];
-var res;
 
 
 

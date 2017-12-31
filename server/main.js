@@ -6,29 +6,17 @@ const webpackConfig = require('../build/webpack.config')
 const project = require('../project.config')
 const compress = require('compression')
 
-var apiservice = require('./apiservice')
-var league = require('../league_data/champions.json')
-const db = require('../db')
-const pg = require('pg');
 const { Client } = require('pg')
-const client = new Client()
+const client = new Client();
 client.connect();
-
-// Initials
-var apikey = "RGAPI-d29965a4-7c01-45a8-b131-fb5167cd1302";
-var getMatchData = true;
-var getMatches = false;
 
 // Run
 
 const app = express()
-var https = require('https');
 
 app.get('/api/:id', function (req, res) {
   var id = req.params.id
-  var ress;
   var winslosses = [];
-  var matchesObject = {"matches": []};
   var query = 'select * from matchdata where championid=' + id;
 
   client.query(query, (err, ress) => {

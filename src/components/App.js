@@ -163,6 +163,7 @@ class App extends React.Component {
 <Route path='/Quinn' component={championpage}/>
 <Route path='/Leblanc' component={championpage}/>
 <Route path='/Ezreal' component={championpage}/>
+<Route path='/Zoe' component={championpage}/>
           </Router>
         </div>
       </Provider>

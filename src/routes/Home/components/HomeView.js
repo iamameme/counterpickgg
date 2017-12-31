@@ -349,7 +349,7 @@ class MainWrapper extends React.Component {
         <img style={frontImgStyle} src={"https://i.imgur.com/13zKD6w.png"}/>
         <div className={"fadeInUp"}>
           <div style={centertext}>
-            <CenterText text={"Pick A Champion to Counter!"}/>
+            <CenterText text={"Pick the Champion You're Playing!"}/>
           </div>
           <div style={champbox} className={["champbox"].join(' ')}>
             <ChampionContainer/>
