@@ -40,7 +40,6 @@ app.get('/api/:id', function (req, res) {
 
 app.get('/api/:name/enemywinrates', function(req, res) {
   var name = req.params.name;
-  var ress;
   var query = 'select * from ' + name;
   console.log(query);
 
@@ -49,7 +48,13 @@ app.get('/api/:name/enemywinrates', function(req, res) {
       console.log(err.stack + "@@@")
     } else {
 
-      var ress = rep.rows[0]["winrates"];
+      var pickedData;
+      for (var i = 0; i < rep.rows.length; i++) {
+        if (rep.rows[i].id === 1) {
+          pickedData = rep.rows[i];
+        }
+      }
+      var ress = pickedData["winrates"];
 
       res.json(ress);
     }

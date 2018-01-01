@@ -140,10 +140,10 @@ var getJSON = function(url, callback) {
 getJSON('http://localhost:3000/api' + window.location.pathname + '/enemywinrates',
   function(err, data) {
     if (err !== null) {
-      //console.log('Something went wrong: ' + err);
+      console.log('Something went wrong: ' + err);
     } else {
       champWinRateData = data;
-      //console.log(data);
+      console.log(data);
     }
   });
 
@@ -314,26 +314,33 @@ class LaneContainer extends React.Component {
       }
       backgroundColor1.push(0);
     }
+
+    var laneFinal = "Error";
     switch(e.target.innerHTML) {
       case "Mid":
         picked1[0] = true;
         backgroundColor1[0] = "#f9f9f9";
+        laneFinal = "middle";
         break;
       case "Top":
         picked1[1] = true;
         backgroundColor1[1] = "#f9f9f9";
+        laneFinal = "top";
         break;
       case "Jungle":
         picked1[2] = true;
         backgroundColor1[2] = "#f9f9f9";
+        laneFinal = "jungle";
         break;
       case "Marksman":
         picked1[3] = true;
         backgroundColor1[3] = "#f9f9f9";
+        laneFinal = "bottom";
         break;
       case "Support":
         picked1[4] = true;
         backgroundColor1[4] = "#f9f9f9";
+        laneFinal = "support";
         break;
     }
     pickedLast[this.state.backgroundColor.indexOf("#f9f9f9")] = true;
@@ -344,16 +351,16 @@ class LaneContainer extends React.Component {
       pickedLast : pickedLast
     });
 
-    this.handleClickMain(e.target.innerHTML);
+    this.handleClickMain(laneFinal);
   }
 
   render() {
     this.laneButtons = [];
-    this.laneButtons.push(<LaneButton lane={"Mid"} clicked={this.state.clicked}  pickedLast={this.state.pickedLast[0]} backgroundColor={this.state.backgroundColor[0]}/>)
-    this.laneButtons.push(<LaneButton lane={"Top"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[1]} backgroundColor={this.state.backgroundColor[1]}/>)
-    this.laneButtons.push(<LaneButton lane={"Jungle"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[2]} backgroundColor={this.state.backgroundColor[2]} />)
-    this.laneButtons.push(<LaneButton lane={"Marksman"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[3]} backgroundColor={this.state.backgroundColor[3]} />)
-    this.laneButtons.push(<LaneButton lane={"Support"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[4]} backgroundColor={this.state.backgroundColor[4]} />)
+    this.laneButtons.push(<LaneButton key={"Mid"} lane={"Mid"} clicked={this.state.clicked}  pickedLast={this.state.pickedLast[0]} backgroundColor={this.state.backgroundColor[0]}/>)
+    this.laneButtons.push(<LaneButton key={"Top"} lane={"Top"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[1]} backgroundColor={this.state.backgroundColor[1]}/>)
+    this.laneButtons.push(<LaneButton key={"Jungle"} lane={"Jungle"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[2]} backgroundColor={this.state.backgroundColor[2]} />)
+    this.laneButtons.push(<LaneButton key={"Marksman"} lane={"Marksman"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[3]} backgroundColor={this.state.backgroundColor[3]} />)
+    this.laneButtons.push(<LaneButton key={"Support"} lane={"Support"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[4]} backgroundColor={this.state.backgroundColor[4]} />)
 
     return (
       <div onClick={this.handleClick.bind(this)}>{this.laneButtons}</div>
@@ -488,10 +495,11 @@ class ChampionContainerSplit extends React.Component {
   constructor(props) {
     super(props);
 
-    this.champWinSort = [], this.champLossSort = [], this.champAll = [];
   }
 
   render() {
+    this.champWinSort = [], this.champLossSort = [], this.champAll = [];
+
     var lane = this.props.lane.toLowerCase();
     if (lane === 'mid') {
       lane = 'middle';
@@ -536,7 +544,7 @@ class ChampionContainerSplit extends React.Component {
         winrate = (winrate * 100).toFixed(2);
       }
 
-      this.champAll.push(<Champion championid={0} championkey={champ} extraText={winrate} championClick={this.props.championClick} />)
+      this.champAll.push(<Champion key={i} championid={0} championkey={champ} extraText={winrate} championClick={this.props.championClick} />)
     }
 
     for (var i in champByWinRate) {
@@ -546,7 +554,7 @@ class ChampionContainerSplit extends React.Component {
         winrate = (winrate * 100).toFixed(2);
       }
 
-      this.champWinSort.push(<Champion championid={0} championkey={champ} extraText={winrate}  championClick={this.props.championClick} />)
+      this.champWinSort.push(<Champion key={i} championid={0} championkey={champ} extraText={winrate}  championClick={this.props.championClick} />)
     }
 
     for (var i in champByLossRate) {
@@ -556,7 +564,7 @@ class ChampionContainerSplit extends React.Component {
         winrate = (winrate * 100).toFixed(2);
       }
 
-      this.champLossSort.push(<Champion championid={0} championkey={champ} extraText={winrate}  championClick={this.props.championClick} />)
+      this.champLossSort.push(<Champion key={i} championid={0} championkey={champ} extraText={winrate}  championClick={this.props.championClick} />)
     }
 
     var champBoxLeft = {
@@ -913,7 +921,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   show: PropTypes.bool,
   children: PropTypes.node
 };
@@ -1302,7 +1310,6 @@ class BuildContainer extends React.Component {
 
     for (var i in data) {
       if (data[i]["champion"] === this.props.echamp) {
-
         // Items
         items = getPercentages(data[i]["data"]["allItems"]);
         totalEntries = data[i]["data"]["total"];
@@ -1396,24 +1403,24 @@ class BuildContainer extends React.Component {
     var build3 = <Build runes={runes[2]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var chosenBuild;
 
-    var buildButton1 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-    var buildButton2 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-    var buildButton3 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+    var buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+    var buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+    var buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
 
     var tab = window.location.hash.substr(1);
     switch (tab) {
       case "":
       case "build1":
         chosenBuild = build1;
-        buildButton1 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+        buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
         break;
       case "build2":
         chosenBuild = build2;
-        buildButton2 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+        buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
         break;
       case "build3":
         chosenBuild = build3;
-        buildButton3 = <li style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+        buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
         break;
       default:
         chosenBuild = build1;
@@ -1430,7 +1437,6 @@ class BuildContainer extends React.Component {
       textAlign: 'center',
       display: 'flex',
       listStyleType: 'none',
-      display: 'flex',
       justifyContent: 'center'
     };
 
@@ -1895,20 +1901,30 @@ class BuildBottom extends React.Component {
     };
 
     var items = filterItems(this.props.items);
-    var summonerView = [], total = 0;
+    var summonerView = [], total = 0, newSummonerArray = [];
 
     for (var i = 0; i < this.props.summoners.length; i++) {
       if (this.props.summoners[i] > 0) {
         total += this.props.summoners[i];
+        newSummonerArray.push([i,this.props.summoners[i]]);
       }
     }
 
-    for (var i = 0; i < this.props.summoners.length; i++) {
+    newSummonerArray.sort(function(a, b){
+      return b[1] - a[1]
+    });
+
+    for (var i = 0; i < newSummonerArray.length; i++) {
+        var tempPercent = ((newSummonerArray[i][1] / total) * 100);
+        summonerView.push(<ImageBox key={i} width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={""} summoner={[parseInt(newSummonerArray[i][0]),tempPercent]}  />);
+    }
+
+    /*for (var i = 0; i < this.props.summoners.length; i++) {
       if (this.props.summoners[i] > 0) {
         this.props.summoners[i] = ((this.props.summoners[i] / total) * 100);
-        summonerView.push(<ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={""} summoner={[i,this.props.summoners[i]]}  />);
+        summonerView.push(<ImageBox key={i} width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={""} summoner={[i,this.props.summoners[i]]}  />);
       }
-    }
+    }*/
 
     return (
       <div style={runeOuterFrame}>

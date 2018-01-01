@@ -305,7 +305,7 @@ class ChampionContainer extends React.Component {
     this.champWinSort = [];
     for (var i in champions['data']) {
       var champ = champions['data'][i]['key'];
-      this.champWinSort.push(<Champion championid={champions['data'][i]['id']} championkey={champ} />)
+      this.champWinSort.push(<Champion key={i} championid={champions['data'][i]['id']} championkey={champ} />)
     }
   }
 
@@ -349,7 +349,7 @@ class MainWrapper extends React.Component {
         <img style={frontImgStyle} src={"https://i.imgur.com/13zKD6w.png"}/>
         <div className={"fadeInUp"}>
           <div style={centertext}>
-            <CenterText text={"Pick the Champion You're Playing!"}/>
+            <CenterText text={"Pick the Champion to Play!"}/>
           </div>
           <div style={champbox} className={["champbox"].join(' ')}>
             <ChampionContainer/>

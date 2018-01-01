@@ -1,234 +1,79 @@
-## React Starter Kit — "[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)" web app boilerplate &nbsp; <a href="https://github.com/kriasoft/react-starter-kit/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-starter-kit.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+## Counterpick.GG — Rune Builds for Every Matchup and More
 
-[React Starter Kit](https://www.reactstarterkit.com) is an opinionated boilerplate for web
-development built on top of [Node.js](https://nodejs.org/),
-[Express](http://expressjs.com/), [GraphQL](http://graphql.org/) and
-[React](https://facebook.github.io/react/), containing modern web development
-tools such as [Webpack](http://webpack.github.io/), [Babel](http://babeljs.io/)
-and [Browsersync](http://www.browsersync.io/). Helping you to stay productive
-following the best practices. A solid starting point for both professionals
-and newcomers to the industry.
+Counterpick.GG started out from two simple ideas. It started out as a counterpicking site. Every time I'd look up "Maokai Counter" in google, I'd get a site with user votes. I don't know who these users are. They could be just as bad as me, voting up the wrong things!
 
-**See** [getting started guide](./docs/getting-started.md), [demo][demo],
-[docs](https://github.com/kriasoft/react-starter-kit/tree/master/docs),
-[roadmap](https://github.com/kriasoft/react-starter-kit/projects/1) &nbsp;|&nbsp;
-**Join** [#react-starter-kit][chat] chat room on Gitter &nbsp;|&nbsp;
-**Visit our sponsors**:<br><br>
+<b>Where's the data?</b>
 
-<p align="center" align="top">
-  <a href="https://rollbar.com/?utm_source=reactstartkit(github)&amp;utm_medium=link&amp;utm_campaign=reactstartkit(github)"><img src="https://koistya.github.io/files/rollbar-362x72.png" height="36" align="top" /></a>
-  <a href="https://x-team.com/hire-react-developers/?utm_source=reactstarterkit&amp;utm_medium=github-link&amp;utm_campaign=reactstarterkit-june"><img src="https://koistya.github.io/files/xteam-255x72.png" height="36" align="top" /></a>
-  <sup><a href="https://x-team.com/join/?utm_source=reactstarterkit&utm_medium=github-link&utm_campaign=reactstarterkit-june">Hiring</a></sup>
-</p>
+The second idea came from the fact that, I'm just not that good at the game. Every game I play, I go to probuilds.com, look at some of the pro builds, and ask myself, "Well, Darshan went this build on Aatrox and he built a first item Spirit Visage, but I'm against a Gankplank. Should I still do that? What do I do?"
 
+So I started making this! It's been my pet project. A LOT of work has gone into this and, it's weird to be getting so close to release. Thanks for visiting, and read below to see the details.
+
+
+<b>TLDR:</b> Click on a champion, click on an enemy champion, get the most popular builds in Diamond+ for that specific matchup based off of real game data.
+
+<b>THIS IS IN ALPHA. IM SORRY FOR IT LOOKING BAD AND NOT HAVING ALL THE FEATURES I WANT TO INCLUDE YET :(</b>
 
 ### Getting Started
 
-  * Follow the [getting started guide](./docs/getting-started.md) to download and run the project
-    ([Node.js](https://nodejs.org/) >= 6.5)
-  * Check the [code recipes](./docs/recipes) used in this boilerplate, or share yours
+  * Option 1: Just go to www.counterpick.gg. It's already uploaded and ready to go.
+  * Option 2: Go to the installation guide down below to find out how to run it on your local machine.
+
+### How it Works
+
+It's all running on React and Postgres. I specifically tried to design it not too complicated, but at the same time, this as my first experience working in React. This was my project I used to learn it (and I adore it).
+
+How the data is compiled:
+* There is a group of js files in server. There is going to be a scheduler that runs them automatically, but I haven't finished that small piece yet.
+* The first file, loadallplayers.js, gets all master and challenger player IDs from all regions
+* Then, loadallaccountids.js load all of the account IDs of the players gotten before
+* matchesscheduler.js then gets all of the match IDs from all of the players with account IDs
+* Then, the meat of it is done in matchdatascheduler.js, which calls all the game IDs that haven't been added to the database yet, and adds entries based on the champion played, the enemy champion, the lane, their build, if they won, and more. It also adds any diamond players to the player tables if found.
+* Finally, with all of the data nice and structured, addjsontotable.js precompile all of the winrates, builds, and more, so nothing is done at runtime. A single JSON file is generated for each champion, with it's winrate against every champion in every lane and compiles the best builds for each.
+
+How are the builds made?:
+* Using all of the data, it finds all of the runes, summoners, and items taken in a specific match. For example, for Aatrox vs Maokai, it gets all of the games that Aatrox won against Maokai, and gets all of the builds that they took.
+* With those runes and the rest of the builds, it compiles the three most popular builds taken based off of the three most popular keystones taken.
+* TLDR: Click on a champion, click on an enemy champion, get the most popular builds in Diamond+ for that specific matchup based off of data. Not votes. Not someone telling me what they think is best. Data.
+
+Margin of Error:
+* I have come to terms with the fact that the data is not infallible. For example, sometimes you get a rogue Soraka jungle game because the guy who got queued as jungle ended up switching to support. From what I've seen, these outliers don't seem to skew the data much, but there definitely still is more to be done to perfect it. I just need more time :D
+
+### How to Install
+
+Unfortunately, there is a bit of a setup, which was why I chose to host it myself, but if you're like me and still want to host it locally, lemme walk ya through. (I never know how much detail I need to go into, so I just try to go into a lot xD)
+
+(I'm a little tired from working so much on this so I may have missed something. Sorry :( )
 
 
-### Customization
-
-The `master` branch of React Starter Kit doesn't include a Flux implementation or any other
-advanced integrations. Nevertheless, we have some integrations available to you in *feature*
-branches that you can use either as a reference or merge into your project:
-
-  * [feature/redux](https://github.com/kriasoft/react-starter-kit/tree/feature/redux) ([PR](https://github.com/kriasoft/react-starter-kit/pull/1084))
-    — isomorphic Redux by [Pavel Lang](https://github.com/langpavel)
-    (see [how to integrate Redux](./docs/recipes/how-to-integrate-redux.md)) (based on `master`)
-  * [feature/apollo](https://github.com/kriasoft/react-starter-kit/tree/feature/apollo) ([PR](https://github.com/kriasoft/react-starter-kit/pull/1147))
-    — isomorphic Apollo Client by [Pavel Lang](https://github.com/langpavel)
-    (see [Tracking PR #1147](https://github.com/kriasoft/react-starter-kit/pull/1147)) (based on `feature/redux`)
-  * [feature/react-intl](https://github.com/kriasoft/react-starter-kit/tree/feature/react-intl) ([PR](https://github.com/kriasoft/react-starter-kit/pull/1135))
-    — isomorphic Redux and React Intl by [Pavel Lang](https://github.com/langpavel)
-    (see [how to integrate React Intl](./docs/recipes/how-to-integrate-react-intl.md)) (based on `feature/apollo`)
-
-You can see status of most reasonable merge combination as [PRs labeled as `TRACKING`](https://github.com/kriasoft/react-starter-kit/labels/TRACKING)
-
-If you think that any of these features should be on `master`, or vice versa, some features should
-removed from the `master` branch, please [let us know](https://gitter.im/kriasoft/react-starter-kit).
-We love your feedback!
+Dependencies:
+* Node
+* NPM
+* Postgres
 
 
-### Comparison
+Steps:
+* Step 1: Git clone the project
+* Step 2: CD in and run 'npm install'
+* Step 3: Run 'psql -f league.sql' to add the database
+* Step 4: Run 'gunzip -c filename.gz | psql stevenbarsam' to import the data I've already compiled to get it running instantly
+* Step 5: Run 'PGUSER=postgres   PGHOST=localhost   PGPASSWORD=postgres   PGDATABASE=stevenbarsam   PGPORT=5432   npm start'. Change it with your credentials.
+* Step 6: It should work!
 
-<table width="100%">
-  <tr>
-    <th>&nbsp;</th>
-    <th>
-      <p>React Starter Kit</p>
-      <a href="https://github.com/kriasoft/react-starter-kit"><img src="https://img.shields.io/github/stars/kriasoft/react-starter-kit.svg?style=social&label=~react-starter-kit" height="20"></a>
-      <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=@ReactStarter" height="20"></a>
-    </th>
-    <th>
-      <p>React Static Boilerplate</p>
-      <a href="https://github.com/kriasoft/react-static-boilerplate"><img src="https://img.shields.io/github/stars/kriasoft/react-static-boilerplate.svg?style=social&label=~react-static-boilerplate" height="20"></a>
-      <a href="https://twitter.com/ReactStatic"><img src="https://img.shields.io/twitter/follow/ReactStatic.svg?style=social&label=@ReactStatic" height="20"></a>
-    </th>
-    <th>
-      <p>ASP.NET Core Starter Kit</p>
-      <a href="https://github.com/kriasoft/aspnet-starter-kit"><img src="https://img.shields.io/github/stars/kriasoft/aspnet-starter-kit.svg?style=social&label=~aspnet-starter-kit" height="20"></a>
-      <a href="https://twitter.com/dotnetreact"><img src="https://img.shields.io/twitter/follow/dotnetreact.svg?style=social&label=@dotnetreact" height="20"></a>
-    </th>
-  <tr>
-  <tr>
-    <th align="right">App type</th>
-    <td align="center"><a href="http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/">Isomorphic</a> (universal)</td>
-    <td align="center"><a href="https://en.wikipedia.org/wiki/Single-page_application">Single-page application</a></td>
-    <td align="center"><a href="https://en.wikipedia.org/wiki/Single-page_application">Single-page application</a></td>
-  </tr>
-  <tr>
-    <th colspan="4">Frontend</th>
-  <tr>
-  <tr>
-    <th align="right">Language</th>
-    <td align="center">JavaScript (ES2015+, JSX)</td>
-    <td align="center">JavaScript (ES2015+, JSX)</td>
-    <td align="center">JavaScript (ES2015+, JSX)</td>
-  </tr>
-  <tr>
-    <th align="right">Libraries</th>
-    <td align="center">
-      <a href="https://github.com/facebook/react">React</a>,
-      <a href="https://github.com/ReactJSTraining/history">History</a>,
-      <a href="https://github.com/kriasoft/universal-router">Universal Router</a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/facebook/react">React</a>,
-      <a href="https://github.com/ReactJSTraining/history">History</a>,
-      <a href="https://github.com/reactjs/redux">Redux</a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/facebook/react">React</a>,
-      <a href="https://github.com/ReactJSTraining/history">History</a>,
-      <a href="https://github.com/reactjs/redux">Redux</a>
-    </td>
-  </tr>
-  <tr>
-    <th align="right">Routes</th>
-    <td align="center">Imperative (functional)</td>
-    <td align="center">Declarative</td>
-    <td align="center">Declarative, cross-stack</td>
-  </tr>
-  <tr>
-    <th colspan="4">Backend</th>
-  <tr>
-  <tr>
-    <th align="right">Language</th>
-    <td align="center">JavaScript (ES2015+, JSX)</td>
-    <td align="center">n/a</td>
-    <td align="center">C#, F#</td>
-  </tr>
-  <tr>
-    <th align="right">Libraries</th>
-    <td align="center">
-      <a href="https://nodejs.org">Node.js</a>,
-      <a href="http://expressjs.com/">Express</a>,
-      <a href="http://docs.sequelizejs.com/en/latest/">Sequelize</a>,<br>
-      <a href="https://github.com/graphql/graphql-js">GraphQL</a></td>
-    <td align="center">n/a</td>
-    <td align="center">
-      <a href="https://docs.asp.net/en/latest/">ASP.NET Core</a>,
-      <a href="https://ef.readthedocs.io/en/latest/">EF Core</a>,<br>
-      <a href="https://docs.asp.net/en/latest/security/authentication/identity.html">ASP.NET Identity</a>
-    </td>
-  </tr>
-  <tr>
-    <th align="right"><a href="https://www.quora.com/What-are-the-tradeoffs-of-client-side-rendering-vs-server-side-rendering">SSR</a></th>
-    <td align="center">Yes</td>
-    <td align="center">n/a</td>
-    <td align="center">n/a</td>
-  </tr>
-  <tr>
-    <th align="right">Data API</th>
-    <td align="center"><a href="http://graphql.org/">GraphQL</a></td>
-    <td align="center">n/a</td>
-    <td align="center"><a href="https://docs.asp.net/en/latest/tutorials/first-web-api.html">Web API</a></td>
-  </tr>
-</table>
+Some Errors That Happen:
+* Node-sass and Ubuntu don't get along well, so, for some reason, you may have to individually install that package after running 'npm install'
 
 
-### Backers
+### Not Important: The Art!
 
-♥ React Starter Kit? Help us keep it alive by donating funds to cover project
-expenses via [OpenCollective](https://opencollective.com/react-starter-kit) or
-[Bountysource](https://salt.bountysource.com/teams/react-starter-kit)!
+If you've noticed on the front page, there's some beautiful Ornn art done by a friend of mine named Sky. I commissioned her, and other local artists for little pieces for the page. Links to their pages will be on the images!
 
-<a href="http://www.nekst.me/" target="_blank" title="lehneres">
-  <img src="https://github.com/lehneres.png?size=64" width="64" height="64" alt="lehneres">
-</a>
-<a href="http://www.vidpanel.com/" target="_blank" title="Tarkan Anlar">
-  <img src="https://github.com/tarkanlar.png?size=64" width="64" height="64" alt="Tarkan Anlar">
-</a>
-<a href="https://morten.olsen.io/" target="_blank" title="Morten Olsen">
-  <img src="https://github.com/mortenolsendk.png?size=64" width="64" height="64" alt="Morten Olsen">
-</a>
-<a href="https://twitter.com/adamthomann" target="_blank" title="Adam">
-  <img src="https://github.com/athomann.png?size=64" width="64" height="64" alt="Adam">
-</a>
-<a href="http://dsernst.com/" target="_blank" title="David Ernst">
-  <img src="https://github.com/dsernst.png?size=64" width="64" height="64" alt="David Ernst">
-</a>
-<a href="http://zanehitchcox.com/" target="_blank" title="Zane Hitchcox">
-  <img src="https://github.com/zwhitchcox.png?size=64" width="64" height="64" alt="Zane Hitchcox">
-</a>
-<a href="https://opencollective.com/react-starter-kit" target="_blank">
-  <img src="https://opencollective.com/static/images/become_backer.svg" width="64" height="64" alt="">
-</a>
+### About Me
 
-
-### How to Contribute
-
-Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
-start is by checking our [open issues](https://github.com/kriasoft/react-starter-kit/issues),
-[submit a new issues](https://github.com/kriasoft/react-starter-kit/issues/new?labels=bug) or
-[feature request](https://github.com/kriasoft/react-starter-kit/issues/new?labels=enhancement),
-participate in discussions, upvote or downvote the issues you like or dislike, send [pull
-requests](CONTRIBUTING.md#pull-requests).
-
-
-### Learn More
-
-  * [Getting Started with React.js](http://facebook.github.io/react/)
-  * [Getting Started with GraphQL and Relay](https://quip.com/oLxzA1gTsJsE)
-  * [React.js Questions on StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
-  * [React.js Discussion Board](https://discuss.reactjs.org/)
-  * [Flux Architecture for Building User Interfaces](http://facebook.github.io/flux/)
-  * [Enzyme — JavaScript Testing utilities for React](http://airbnb.io/enzyme/)
-  * [Flow — A static type checker for JavaScript](http://flowtype.org/)
-  * [The Future of React](https://github.com/reactjs/react-future)
-  * [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
-
-
-### Related Projects
-
-  * [GraphQL Starter Kit](https://github.com/kriasoft/graphql-starter-kit) — Boilerplate for building data APIs with Node.js, JavaScript (via Babel) and GraphQL
-  * [Membership Database](https://github.com/membership/membership.db) — SQL schema boilerplate for user accounts, profiles, roles, and auth claims
-  * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — Boilerplate for authoring JavaScript/React.js libraries
-
-
-### Support
-
-  * [#react-starter-kit](http://stackoverflow.com/questions/tagged/react-starter-kit) on Stack Overflow — Questions and answers
-  * [#react-starter-kit](https://gitter.im/kriasoft/react-starter-kit) on Gitter — Watch announcements, share ideas and feedback
-  * [GitHub issues](https://github.com/kriasoft/react-starter-kit/issues), or [Scrum board](https://waffle.io/kriasoft/react-starter-kit) — File issues, send feature requests
-  * [appear.in/react](https://appear.in/react) — Open hours! Exchange ideas and experiences (React, GraphQL, startups and pet projects)
-  * [@koistya](https://twitter.com/koistya) on [Codementor](https://www.codementor.io/koistya), or [Skype](http://hatscripts.com/addskype?koistya) — Private consulting
-
+  * I'm just a 21 year old nerd from good ol' Texas. I'm in school at UTD for Software Engineering, and I work at a cool little company called S5 Stratos as a Software Engineer there. Between school, work, and this, I don't sleep.
+  * It's been a very, very, VERY long month. Finals, working on this 2-10 hours a day. But it feels great to finally be able to sit down and just enjoy it, and I really hope you enjoy it too. <3
 
 ### License
 
-Copyright © 2014-present Kriasoft, LLC. This source code is licensed under the MIT
-license found in the [LICENSE.txt](https://github.com/kriasoft/react-starter-kit/blob/master/LICENSE.txt)
-file. The documentation to the project is licensed under the
-[CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/) license.
+Copyright © 2017-present. I don't know what a license is to be honest. I just write code.
+Made with ♥ by Steven Barsam (Don't go to stevenbarsam.com. I don't own the domain. My coworker does.)
 
----
-Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/kriasoft/react-starter-kit/graphs/contributors)
-
-[rsk]: https://www.reactstarterkit.com
-[demo]: http://demo.reactstarterkit.com
-[node]: https://nodejs.org
-[chat]: https://gitter.im/kriasoft/react-starter-kit
