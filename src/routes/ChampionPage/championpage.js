@@ -137,7 +137,7 @@ var getJSON = function(url, callback) {
   xhr.send();
 };
 
-getJSON('http://localhost:3000/api' + window.location.pathname + '/enemywinrates',
+getJSON('/api' + window.location.pathname + '/enemywinrates',
   function(err, data) {
     if (err !== null) {
       console.log('Something went wrong: ' + err);
