@@ -2,7 +2,8 @@
 
 Counterpick.GG started out from two simple ideas. It started out as a counterpicking site. Every time I'd look up "Maokai Counter" in google, I'd get a site with user votes. I don't know who these users are. They could be just as bad as me, voting up the wrong things!
 
-<div align="center"><b>Where's the data?</b></div>
+<div align="center">I kept asking myself. <b>Where's the data?</b></div>
+<br/>
 
 The second idea came from the fact that, I'm just not that good at the game. Every game I play, I go to probuilds.com, look at some of the pro builds, and ask myself, "Well, Darshan went this build on Aatrox and he built a first item Spirit Visage, but I'm against a Gankplank. Should I still do that? What do I do?"
 
