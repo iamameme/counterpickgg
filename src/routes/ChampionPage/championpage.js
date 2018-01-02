@@ -11,6 +11,7 @@ import inspirationBackground from '../../../league_data/runesReforged/perkBackgr
 import resolveBackground from '../../../league_data/runesReforged/perkBackgrounds/8400.jpg';
 
 
+
 var mainRuneImages = {
   "8000": {
     "left": require('../../../league_data/runesReforged/backgrounds/precisionLeft.png'),
@@ -143,7 +144,7 @@ getJSON('/api' + window.location.pathname + '/enemywinrates',
       console.log('Something went wrong: ' + err);
     } else {
       champWinRateData = data;
-      console.log(data);
+      //console.log(data);
     }
   });
 
@@ -207,10 +208,21 @@ class Champion extends React.Component {
     this.championimg = this.championkey;
   }
 
+resize = () => this.forceUpdate()
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
+  }
+
+
+
   render() {
     var style = {
-      height:50,
-      width:50
+      height:'50px'
     };
     var divStyle = {
       margin: 10,
@@ -222,6 +234,10 @@ class Champion extends React.Component {
       fontFamily:'Teko',
       fontSize: '.9em'
     };
+    if (window.innerWidth > 1500) {
+	style["height"] = '3.5vw'
+	textStyle["fontSize"] = '1.2em'
+	}
 
     var winrate;
     var winrateText = this.props.extraText + '%';
@@ -398,7 +414,7 @@ class TopContainer extends React.Component {
       championWinRate: 0
     };
 
-    let url = 'http://localhost:3000/api/' + championId;
+    let url = '/api/' + championId;
     var me = this;
     getJSON(url,
       function(err, data) {
@@ -516,14 +532,30 @@ class ChampionContainerSplit extends React.Component {
     champByWinRate.sort(function(a, b) {
       return a.winrate - b.winrate;
     });
-    var champByLossRate = [];
+    var champByLossRate = [], champCountCheck = [], champCountCheck2 = [], limit = 75, limit2 = 35;
     for (var i = 0; i < champByWinRate.length; i++) {
-      //console.log(champByWinRate[i]["champion"] + "----" + champByWinRate[i]["total"]);
-      if ('/' + champByWinRate[i]["champion"] == window.location.pathname) {
+      if (champByWinRate[i]["total"] > limit) {
+        champCountCheck.push(champByWinRate[i]);
+      }
+	 if (champByWinRate[i]["total"] > limit2) {
+        champCountCheck2.push(champByWinRate[i]);
+      }
+
+    }
+
+    if (champCountCheck.length < 12) {
+      limit = (limit-25);
+      if (champCountCheck2.length < 12) {
+        limit = (limit - 45);
+      }
+    }
+
+    for (var i = 0; i < champByWinRate.length; i++) {
+      if ('/' + champByWinRate[i]["champion"] === window.location.pathname) {
         champByWinRate.splice(i, 1);
         i--;
       } else {
-          if (champByWinRate[i]["total"] < 15) {
+          if (champByWinRate[i]["total"] < limit) {
             // REMOVE FAKE THRESHOLD
             champByWinRate.splice(i, 1);
             i--;
@@ -716,7 +748,8 @@ class BottomContainer extends React.Component {
 
     this.spinner = {
       width: '100%',
-      opacity: 0
+      opacity: 0,
+      display: 'none'
     };
 
     this.loadingText = "Loading...";
@@ -796,26 +829,49 @@ class BottomContainer extends React.Component {
           animationDelay: '0s',
           animation: 'fadeOutSoft 1.50s forwards'
         };
+
+        setTimeout(function() {
+          this.spinner = {
+            display: 'none'
+          };
+          this.forceUpdate();
+        }.bind(this),1500);
       }.bind(this),700);
     }
+
+    var ball1 = {
+      backgroundImage : 'url(https://i.imgur.com/885br0R.png)'
+    };
+
+    var ball2 = {
+      backgroundImage : 'url(https://i.imgur.com/OtERELT.png)'
+    };
+
+    var ball3 = {
+      backgroundImage : 'url(https://i.imgur.com/aRGjSUu.png)'
+    };
+
+    var ball4 = {
+      backgroundImage : 'url(https://i.imgur.com/YN9qVGQ.png)'
+    };
 
     return (<div style={this.loadingContainer} className={"champbox"}>
       <div style={this.spinner}>
         <div id="cssload-contain" style={this.spinner2}>
           <div className="cssload-wrap" id="cssload-wrap1">
-            <div className="cssload-ball" id="cssload-ball1"></div>
+            <div style={ball1} className="cssload-ball"></div>
           </div>
 
           <div className="cssload-wrap" id="cssload-wrap2">
-            <div className="cssload-ball" id="cssload-ball2"></div>
+            <div style={ball2} className="cssload-ball" id="cssload-ball2"></div>
           </div>
 
           <div className="cssload-wrap" id="cssload-wrap3">
-            <div className="cssload-ball" id="cssload-ball3"></div>
+            <div  style={ball3} className="cssload-ball" id="cssload-ball3"></div>
           </div>
 
           <div className="cssload-wrap" id="cssload-wrap4">
-            <div className="cssload-ball" id="cssload-ball4"></div>
+            <div style={ball4} className="cssload-ball" id="cssload-ball4"></div>
           </div>
           <h4 style={loadingText} className={loadingText}>{this.loadingText}</h4>
         </div>
@@ -858,7 +914,7 @@ class Modal extends React.Component {
 
     if(!this.props.show) {
       classNames = "";
-      var animationDur = '0s';
+      var animationDur = '0.01s';
       if (this.props.clickedChamp !== undefined) {
         animationDur = '.75s';
       }
@@ -1143,7 +1199,7 @@ class ModalChampion extends React.Component {
       textTransform: 'uppercase',
       letterSpacing: '1px',
       color: '#d8cfbd',
-      fontSize: '1.35em',
+      fontSize: '2.8vh',
       margin: '0 0 2px'
     };
 
@@ -1152,7 +1208,7 @@ class ModalChampion extends React.Component {
       textTransform: 'uppercase',
       letterSpacing: '1px',
       color: '#d8cfbd',
-      fontSize: '.85em',
+      fontSize: '1.5vh',
       margin: '0 0 2px'
     };
 
@@ -1163,7 +1219,8 @@ class ModalChampion extends React.Component {
       zIndex: 0,
       position: 'relative',
       width: '100%',
-      background: '#16181d'
+      background: '#16181d',
+      marginTop: '3.5vh'
     };
 
     return (
@@ -1181,8 +1238,7 @@ class ModalChampion extends React.Component {
           <div style={textbox}>
             <p style={pStyle}>{echampName} Build</p>
             <p style={vsStyle}> vs </p>
-            <p style={pStyle}>{champName}</p>
-            <p style={pStyle}>COMING SOON!</p>
+            <p style={pStyle}>{champName} COMING SOON!</p>
           </div>
           <br/>
           <LeagueButton text={"GET BUILD!"} color={'#b2d9db'} width={'300px'} backgroundColor={'#1e2328'} passclick={this.props.passclick} champion={this.props.clickedChamp} echampion={champKey} disabled={true} />
@@ -1386,6 +1442,10 @@ class BuildContainer extends React.Component {
       color: '#dbfbfc'
     };
 
+    if (window.innerWidth > 1500) {
+	titleStyle["fontSize"] = '1.2vw'
+	}
+
     var descriptionStyle = {
       fontSize: '.7em',
       textAlign: 'center',
@@ -1398,29 +1458,45 @@ class BuildContainer extends React.Component {
       display: 'list-item'
     };
 
+    if (runes[2] === undefined) {
+	return (
+      <div style={this.loadingContainer} className={"champbox"}>
+      <div style={this.afterl}>
+          <ul style={nav} className="nav nav-tabs">
+            Not enough data :(
+          </ul>
+
+          <div style={tabContent}>
+          </div>
+      </div>
+
+    </div>);
+
+}
+
     var build1 = <Build runes={runes[0]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var build2 = <Build runes={runes[1]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
     var build3 = <Build runes={runes[2]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
-    var chosenBuild;
+    var chosenBuild, buttonWidth = '22vw';
 
-    var buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-    var buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-    var buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+    var buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+    var buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
+    var buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
 
     var tab = window.location.hash.substr(1);
     switch (tab) {
       case "":
       case "build1":
         chosenBuild = build1;
-        buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+        buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
         break;
       case "build2":
         chosenBuild = build2;
-        buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+        buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
         break;
       case "build3":
         chosenBuild = build3;
-        buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={'220px'} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+        buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
         break;
       default:
         chosenBuild = build1;
@@ -1777,7 +1853,7 @@ class Build extends React.Component {
                 </svg>
                 <svg style={svg2} viewBox="0 0 800 800">
                   <image x="0" y="0" height={"680px"} xlinkHref={rightBackground} />
-                  <image x="42" y="40" xlinkHref={topIcon2} />
+                  <image x="44" y="38" xlinkHref={topIcon2} />
                   <image x="32" y="296" xlinkHref={runeImages[subRunes[0]]} />
                     <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="316">{subRuneTitles[0]}</text>
                     <foreignObject x="230" y="336" width="520" height="220">
@@ -2120,3 +2196,4 @@ export const championpage = () => (
 )
 
 export default Radium(championpage)
+
