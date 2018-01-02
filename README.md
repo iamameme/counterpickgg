@@ -57,7 +57,7 @@ Dependencies:
 Steps:
 * Step 1: Git clone the project
 * Step 2: CD in and run 'npm install'
-* Step 3: Run 'psql -f league.sql' to add the database
+* Step 3: Run 'createdb stevenbarsam' to add the database (yes I named it after myself)
 * Step 4: Run 'gunzip -c filename.gz | psql stevenbarsam' to import the data I've already compiled to get it running instantly
 * Step 5: Run 'PGUSER=postgres   PGHOST=localhost   PGPASSWORD=postgres   PGDATABASE=stevenbarsam   PGPORT=5432   npm start'. Change it with your credentials.
 * Step 6: It should work!
