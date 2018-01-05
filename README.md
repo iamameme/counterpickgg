@@ -1,6 +1,6 @@
 ## Counterpick.GG — Rune Builds for Every Matchup and More
 
-Counterpick.GG started out from two simple ideas. It started out as a counterpicking site. Every time I'd look up "Maokai Counter" in google, I'd get a site with user votes. I don't know who these users are. They could be just as bad as me, voting up the wrong things!
+Counterpick.GG started out from two simple ideas. It started out as a counterpicking site. Every time I'd look up "Maokai Counter" in google, I'd get a site with user votes. I don't know who these users are. How do I know if they are bronze or challenger?
 
 <div align="center">I kept asking myself. <b>Where's the data?</b></div>
 <br/>
@@ -10,7 +10,7 @@ The second idea came from the fact that, I'm just not that good at the game. Eve
 So I started making this! It's been my pet project. A LOT of work has gone into this and, it's weird to be getting so close to release. Thanks for visiting, and read below to see the details.
 
 
-<b>TLDR:</b> Click on a champion, click on an enemy champion, get the most popular builds in Diamond+ for that specific matchup based off of real game data.
+<b>TLDR:</b> Click on a champion, click on an enemy champion, get the most popular builds from Diamond-Challenger games for that specific matchup based off of real game data. More details below.
 
 <br/>
 <div align="center"><b>THIS IS IN ALPHA. IM SORRY FOR IT LOOKING BAD AND NOT HAVING ALL THE FEATURES I WANT TO INCLUDE YET :( THANK YOU <3</b></div>
@@ -30,7 +30,7 @@ It's all running on React and Postgres. I specifically tried to design it not to
 * Then, loadallaccountids.js load all of the account IDs of the players gotten before
 * matchesscheduler.js then gets all of the match IDs from all of the players with account IDs
 * Then, the meat of it is done in matchdatascheduler.js, which calls all the game IDs that haven't been added to the database yet, and adds entries based on the champion played, the enemy champion, the lane, their build, if they won, and more. It also adds any diamond players to the player tables if found.
-* Finally, with all of the data nice and structured, addjsontotable.js precompile all of the winrates, builds, and more, so nothing is done at runtime. A single JSON file is generated for each champion, with it's winrate against every champion in every lane and compiles the best builds for each.
+* Finally, with all of the data nice and structured, addjsontotable.js precompile all of the winrates, builds, and more, so nothing is done at runtime. A single JSON file is generated for each champion, with it's winrate against every champion in every lane and compiles the best builds for each. By best builds, I mean it takes the top 3 most taken keystones for that specific matchup, then makes a build for each using the most taken for each other rune as well. It also gives the best items to build in the matchup based off what others built, and what summoners to take based off of the lane and matchup :D
 
 <b>How are the builds made?:</b>
 * Using all of the data, it finds all of the runes, summoners, and items taken in a specific match. For example, for Aatrox vs Maokai, it gets all of the games that Aatrox won against Maokai, and gets all of the builds that they took.
