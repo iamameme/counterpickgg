@@ -1,8 +1,14 @@
 
 var apiservice = require('./apiservice')
 var league = require('../league_data/champions.json')
-const { Client } = require('pg')
-const client = new Client()
+const { Client } = require('pg');
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: 'stevenbarsam',
+  password: null,
+  port: 5432,
+});
 client.connect();
 
 var lanes = ['middle', 'bottom', 'support', 'top', 'jungle'];

@@ -9,7 +9,13 @@ import dominationBackground from '../../../league_data/runesReforged/perkBackgro
 import sorceryBackground from '../../../league_data/runesReforged/perkBackgrounds/8200.jpg';
 import inspirationBackground from '../../../league_data/runesReforged/perkBackgrounds/8300.jpg';
 import resolveBackground from '../../../league_data/runesReforged/perkBackgrounds/8400.jpg';
+location.hash="";
 
+function importAll(r) {
+  return r.keys().map(r);
+}
+
+var proImages = importAll(require.context('./', false, /\.(png|jpe?g|svg)$/));
 
 
 var mainRuneImages = {
@@ -115,6 +121,67 @@ var summonerSpells = {
   "21" : require('../../../league_data/summonerSpells/21.png')
 };
 
+var proPictures = {
+  "ambition" : require('../../../league_data/proPictures/ambition.png'),
+  "bang" : require('../../../league_data/proPictures/bang.png'),
+  "biofrost" : require('../../../league_data/proPictures/biofrost.png'),
+  "bjergsen" : require('../../../league_data/proPictures/bjergsen.png'),
+  "bunny fufuu" : require('../../../league_data/proPictures/bunny_fufuu.png'),
+  "c9 sneaky" : require('../../../league_data/proPictures/c9_sneaky.png'),
+  "cody sun" : require('../../../league_data/proPictures/cody_sun.png'),
+  "contractz" : require('../../../league_data/proPictures/contractz.png'),
+  "corejj" : require('../../../league_data/proPictures/corejj.png'),
+  "cris" : require('../../../league_data/proPictures/cris.png'),
+  "deft" : require('../../../league_data/proPictures/deft.png'),
+  "doublelift" : require('../../../league_data/proPictures/doublelift.png'),
+  "dyrus" : require('../../../league_data/proPictures/dyrus.png'),
+  "faker" : require('../../../league_data/proPictures/faker.png'),
+  "fox fenix" : require('../../../league_data/proPictures/fox_fenix.png'),
+  "froggen" : require('../../../league_data/proPictures/froggen.png'),
+  "goldenglue" : require('../../../league_data/proPictures/goldenglue.png'),
+  "gorilla" : require('../../../league_data/proPictures/gorilla.png'),
+  "hakuho" : require('../../../league_data/proPictures/hakuho.png'),
+  "hauntzer" : require('../../../league_data/proPictures/hauntzer.png'),
+  "imaqtpie" : require('../../../league_data/proPictures/imaqtpie.png'),
+  "impact" : require('../../../league_data/proPictures/impact.png'),
+  "jensen" : require('../../../league_data/proPictures/jensen.png'),
+  "keith" : require('../../../league_data/proPictures/keith.png'),
+  "kold" : require('../../../league_data/proPictures/kold.png'),
+  "kramer" : require('../../../league_data/proPictures/kramer.png'),
+  "lemonnation" : require('../../../league_data/proPictures/lemonnation.png'),
+  "liquid fabbbyyy" : require('../../../league_data/proPictures/liquid_fabbbyyy.png'),
+  "lourlo" : require('../../../league_data/proPictures/lourlo.png'),
+  "maple" : require('../../../league_data/proPictures/maple.png'),
+  "mata" : require('../../../league_data/proPictures/mata.png'),
+  "matt" : require('../../../league_data/proPictures/matt.png'),
+  "meteos" : require('../../../league_data/proPictures/meteos.png'),
+  "mike yueng" : require('../../../league_data/proPictures/mike_yeung.png'),
+  "nintendudex" : require('../../../league_data/proPictures/nintendudex.jpg'),
+  "norskeren" : require('../../../league_data/proPictures/norskeren.png'),
+  "noxiak" : require('../../../league_data/proPictures/noxiak.png'),
+  "nuguri" : require('../../../league_data/proPictures/nuguri.png'),
+  "peanut" : require('../../../league_data/proPictures/peanut.png'),
+  "piglet" : require('../../../league_data/proPictures/piglet.png'),
+  "pobelter" : require('../../../league_data/proPictures/pobelter.png'),
+  "pray" : require('../../../league_data/proPictures/pray.png'),
+  "quas" : require('../../../league_data/proPictures/quas.png'),
+  "reignover" : require('../../../league_data/proPictures/reignover.png'),
+  "rekkles" : require('../../../league_data/proPictures/rekkles.png'),
+  "santorin" : require('../../../league_data/proPictures/santorin.png'),
+  "sebekx" : require('../../../league_data/proPictures/sebekx.png'),
+  "shiphtur" : require('../../../league_data/proPictures/shiphtur.png'),
+  "smeb" : require('../../../league_data/proPictures/smeb.png'),
+  "smoothie" : require('../../../league_data/proPictures/smoothie.png'),
+  "ssol" : require('../../../league_data/proPictures/ssol.png'),
+  "summit" : require('../../../league_data/proPictures/summit.png'),
+  "trance" : require('../../../league_data/proPictures/trance.png'),
+  "untara" : require('../../../league_data/proPictures/untara.png'),
+  "wildturtle" : require('../../../league_data/proPictures/wildturtle.png'),
+  "wolf" : require('../../../league_data/proPictures/wolf.png'),
+  "xmithie" : require('../../../league_data/proPictures/xmithie.png'),
+  "xpecial" : require('../../../league_data/proPictures/xpecial.png'),
+  "zven" : require('../../../league_data/proPictures/zven.png')
+};
 
 
 var champions = require('../../../league_data/champions.json');
@@ -208,7 +275,7 @@ class Champion extends React.Component {
     this.championimg = this.championkey;
   }
 
-resize = () => this.forceUpdate()
+  resize = () => this.forceUpdate()
 
   componentDidMount() {
     window.addEventListener('resize', this.resize)
@@ -222,7 +289,7 @@ resize = () => this.forceUpdate()
 
   render() {
     var style = {
-      height:'50px'
+      height:'4.5vw'
     };
     var divStyle = {
       margin: 10,
@@ -234,10 +301,10 @@ resize = () => this.forceUpdate()
       fontFamily:'Teko',
       fontSize: '.9em'
     };
-    if (window.innerWidth > 1500) {
-	style["height"] = '3.5vw'
-	textStyle["fontSize"] = '1.2em'
-	}
+    if (document.body.clientWidth > 1500) {
+      style["height"] = '3.5vw'
+      textStyle["fontSize"] = '1.2em'
+    }
 
     var winrate;
     var winrateText = this.props.extraText + '%';
@@ -259,11 +326,11 @@ resize = () => this.forceUpdate()
     var champ = '/' + this.props.championkey;
     return (
       <div style={divStyle} onClick={() => this.props.championClick(this.props.championkey)} className={"championInTable"}>
-          <img style={style} src={this.championimg} />
-          <p style={textStyle}>
-            {this.championname}
-            <span style={winrate}><br />{winrateText}</span>
-          </p>
+        <img style={style} src={this.championimg} />
+        <p style={textStyle}>
+          {this.championname}
+          <span style={winrate}><br />{winrateText}</span>
+        </p>
       </div>);
   }
 }
@@ -285,17 +352,17 @@ class LaneButton extends React.Component {
         active = '';
       }
     } else if (this.props.backgroundColor == 0) {
-        active = ''
+      active = ''
       if (this.props.pickedLast == true) {
         active = 'lanebutton-act'
       }
     } else {
-        active = 'lanebutton-notact'
-      }
+      active = 'lanebutton-notact'
+    }
 
     var classes = 'leagueButton' + ' ' + active;
     return (
-        <button className={classes}>{this.props.lane}</button>
+      <button className={classes}>{this.props.lane}</button>
     );
   }
 }
@@ -378,14 +445,20 @@ class LaneContainer extends React.Component {
     this.laneButtons.push(<LaneButton key={"Marksman"} lane={"Marksman"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[3]} backgroundColor={this.state.backgroundColor[3]} />)
     this.laneButtons.push(<LaneButton key={"Support"} lane={"Support"} clicked={this.state.clicked} pickedLast={this.state.pickedLast[4]} backgroundColor={this.state.backgroundColor[4]} />)
 
+    var laneButtonContainer = {
+      verticalAlign: 'middle',
+      display: 'table-cell'
+    }
+
     return (
-      <div onClick={this.handleClick.bind(this)}>{this.laneButtons}</div>
-      );
+      <div style={laneButtonContainer}  onClick={this.handleClick.bind(this)}>{this.laneButtons}</div>
+    );
   }
 }
 
 
 var champion = window.location.pathname.substr(1,window.location.pathname.length);
+document.title = champion + " Build";
 var championkey = champion + ".png";
 switch (championkey) {
   case "Kayn.png":
@@ -453,10 +526,10 @@ class TopContainer extends React.Component {
       width: '100%'
     };
     var champImg = {
-      height: '128%',
+      height: '9vh',
       paddingLeft: 45,
       float: 'left',
-      paddingRight: 15
+      paddingRight: 25
     };
 
     var champTextTitle = {
@@ -537,16 +610,16 @@ class ChampionContainerSplit extends React.Component {
       if (champByWinRate[i]["total"] > limit) {
         champCountCheck.push(champByWinRate[i]);
       }
-	 if (champByWinRate[i]["total"] > limit2) {
+      if (champByWinRate[i]["total"] > limit2) {
         champCountCheck2.push(champByWinRate[i]);
       }
 
     }
 
     if (champCountCheck.length < 12) {
-      limit = (limit-25);
+      limit = (limit-45);
       if (champCountCheck2.length < 12) {
-        limit = (limit - 45);
+        limit = (limit - 40);
       }
     }
 
@@ -555,15 +628,15 @@ class ChampionContainerSplit extends React.Component {
         champByWinRate.splice(i, 1);
         i--;
       } else {
-          if (champByWinRate[i]["total"] < limit) {
-            // REMOVE FAKE THRESHOLD
-            champByWinRate.splice(i, 1);
-            i--;
-          } else {
-            champByLossRate.push(champByWinRate[i]);
-          }
+        if (champByWinRate[i]["total"] < limit) {
+          // REMOVE FAKE THRESHOLD
+          champByWinRate.splice(i, 1);
+          i--;
+        } else {
+          champByLossRate.push(champByWinRate[i]);
         }
       }
+    }
 
 
     champByWinRate.reverse().splice(12);
@@ -670,7 +743,7 @@ class ChampionContainerSplit extends React.Component {
         <div style={champBoxMiddle}>{this.champLossSort}</div>
         <div style={champBoxRight}>{this.champAll}</div>
 
-    </div>);
+      </div>);
   }
 }
 
@@ -706,9 +779,10 @@ var boxTop2 = {
 };
 
 var laneBox = {
-  height:'100px',
+  height:'100%',
   width:'100%',
-  overflowX:'scroll'
+  overflowX:'scroll',
+  display: 'table'
 };
 
 var title_style = {
@@ -944,8 +1018,7 @@ class Modal extends React.Component {
       alignItems: 'center',
       justifyContent: 'center',
       flexDirection: 'column',
-      minHeight: '33vh',
-      height: '20vh',
+      height: '30vw',
       borderTop: '2px solid #785b28',
       borderBottom: '2px solid #785b28',
       animationName: 'fadeInU',
@@ -954,7 +1027,7 @@ class Modal extends React.Component {
 
     var topImg = {
       top: '23.4%',
-      left: (window.innerWidth - 640)/2 + 'px',
+      left: (document.body.clientWidth - 640)/2 + 'px',
       height: '50px',
       position: 'relative',
       zIndex: '9999999999'
@@ -963,7 +1036,7 @@ class Modal extends React.Component {
     return (
       <div className={classNames} style={backdropStyle} >
         <img src={'https://lolstatic-a.akamaihd.net/frontpage/apps/prod/rg-go-noobs/en_US/57757f26946d4584aa6ff5623dd84445b516c35e/assets/img/divider.png'}
-         style={topImg} />
+             style={topImg} />
         <div style={modalStyle}>
 
           {this.props.children}
@@ -1104,12 +1177,12 @@ class LeagueButton extends React.Component {
 
     return (
       <div>
-      <a href={this.props.href} style={aStyle}>
-      <button disabled={disabled} style={button} onClick={()=>this.props.passclick(this.props.champion,this.props.echampion)}>
-         {this.props.text}
-          {this.props.children}
-      </button>
-      </a>
+        <a href={this.props.href} style={aStyle}>
+          <button disabled={disabled} style={button} onClick={()=>this.props.passclick(this.props.champion,this.props.echampion)}>
+            {this.props.text}
+            {this.props.children}
+          </button>
+        </a>
       </div>
     );
   }
@@ -1146,21 +1219,21 @@ class QuickBuild extends React.Component {
 
     return (
       // onClick={this.handleClick.bind(this)}
-        <div className="container">
-          <h2>{toptext}</h2>
+      <div className="container">
+        <h2>{toptext}</h2>
 
-          <ul className="nav nav-tabs">
-            <li><a data-toggle="pill" href="#home">Build #1</a></li>
-            <li><a data-toggle="pill" href="#menu1">Build #2</a></li>
-            <li><a data-toggle="pill" href="#menu2">Build #3</a></li>
-            <li><a data-toggle="pill" href="#menu3">Build #4</a></li>
-            <li><a data-toggle="pill" href="#menu3">Build #5</a></li>
-          </ul>
+        <ul className="nav nav-tabs">
+          <li><a data-toggle="pill" href="#home">Build #1</a></li>
+          <li><a data-toggle="pill" href="#menu1">Build #2</a></li>
+          <li><a data-toggle="pill" href="#menu2">Build #3</a></li>
+          <li><a data-toggle="pill" href="#menu3">Build #4</a></li>
+          <li><a data-toggle="pill" href="#menu3">Build #5</a></li>
+        </ul>
 
-          <div className="tab-content">
+        <div className="tab-content">
 
-          </div>
         </div>
+      </div>
     );
   }
 }
@@ -1199,7 +1272,7 @@ class ModalChampion extends React.Component {
       textTransform: 'uppercase',
       letterSpacing: '1px',
       color: '#d8cfbd',
-      fontSize: '2.8vh',
+      fontSize: '2.8vw',
       margin: '0 0 2px'
     };
 
@@ -1208,7 +1281,7 @@ class ModalChampion extends React.Component {
       textTransform: 'uppercase',
       letterSpacing: '1px',
       color: '#d8cfbd',
-      fontSize: '1.5vh',
+      fontSize: '1.5vw',
       margin: '0 0 2px'
     };
 
@@ -1262,6 +1335,9 @@ function getRuneType(rune) {
     case '8242':
       runeMain = "8400";
       break;
+    case '8410':
+      runeMain = "8300";
+      break;
     default:
       break;
   }
@@ -1296,7 +1372,7 @@ class BuildContainer extends React.Component {
 
     this.loadingContainer = {
       opacity: 1,
-      height:'130%',
+      height:'90vw',
       width:'85%',
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       margin: '0 auto 30px',
@@ -1343,10 +1419,13 @@ class BuildContainer extends React.Component {
         case '8242':
           runeMain = "8400";
           break;
+        case '8410':
+          runeMain = "8300";
+          break;
         default:
           break;
 
-        }
+      }
 
       for (var i = 0; i < runeJSON.length; i++) {
         if (runeJSON[i]["id"].toString() === runeMain) {
@@ -1362,10 +1441,14 @@ class BuildContainer extends React.Component {
     }
 
     var data = champWinRateData["winrates"][this.props.lane.toLowerCase()];
-    var items, runes, summoners, totalEntries;
+    var items, runes, summoners, totalEntries, proBuilds;
 
     for (var i in data) {
       if (data[i]["champion"] === this.props.echamp) {
+
+        // Probuilds
+        proBuilds = data[i]["data"]["proBuilds"];
+
         // Items
         items = getPercentages(data[i]["data"]["allItems"]);
         totalEntries = data[i]["data"]["total"];
@@ -1442,9 +1525,9 @@ class BuildContainer extends React.Component {
       color: '#dbfbfc'
     };
 
-    if (window.innerWidth > 1500) {
-	titleStyle["fontSize"] = '1.2vw'
-	}
+    if (document.body.clientWidth > 1500) {
+      titleStyle["fontSize"] = '1.2vw'
+    }
 
     var descriptionStyle = {
       fontSize: '.7em',
@@ -1458,54 +1541,91 @@ class BuildContainer extends React.Component {
       display: 'list-item'
     };
 
-    if (runes[2] === undefined) {
-	return (
-      <div style={this.loadingContainer} className={"champbox"}>
-      <div style={this.afterl}>
-          <ul style={nav} className="nav nav-tabs">
-            Not enough data :(
-          </ul>
+    if (runes[1] === undefined) {
+      return (
+        <div style={this.loadingContainer} className={"champbox"}>
+          <div style={this.afterl}>
+            <ul style={nav} className="nav nav-tabs">
+              Not enough data :(
+            </ul>
 
-          <div style={tabContent}>
+            <div style={tabContent}>
+            </div>
           </div>
-      </div>
 
-    </div>);
+        </div>);
 
-}
+    }
 
-    var build1 = <Build runes={runes[0]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
-    var build2 = <Build runes={runes[1]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
-    var build3 = <Build runes={runes[2]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
-    var chosenBuild, buttonWidth = '22vw';
+    var chosenBuild,buttonWidth, tab, build1, build2, build3, buildButton1, buildButton2, buildButton3;
+    if (runes[2] === undefined) {
+      build1 = <Build runes={runes[0]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
+      build2 = <Build runes={runes[1]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
+      chosenBuild, buttonWidth = document.body.clientWidth / 5;
 
-    var buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-    var buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
-    var buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+      buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+      buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
 
-    var tab = window.location.hash.substr(1);
-    switch (tab) {
-      case "":
-      case "build1":
-        chosenBuild = build1;
-        buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Best Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
-        break;
-      case "build2":
-        chosenBuild = build2;
-        buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
-        break;
-      case "build3":
-        chosenBuild = build3;
-        buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
-        break;
-      default:
-        chosenBuild = build1;
-        break;
+      tab = window.location.hash.substr(1);
+      switch (tab) {
+        case "":
+        case "build1":
+          chosenBuild = build1;
+          buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+          break;
+        case "build2":
+          chosenBuild = build2;
+          buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
+          break;
+        default:
+          chosenBuild = build1;
+          break;
+      }
+
+
+    } else {
+      build1 = <Build runes={runes[0]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
+      build2 = <Build runes={runes[1]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
+      build3 = <Build runes={runes[2]} items={items} summoners={getPercentages(summoners)} totalEntries={totalEntries} />;
+      chosenBuild, buttonWidth = document.body.clientWidth / 5;
+
+      buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+      buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
+      buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+
+      var proBuildButtons = [];
+      if (proBuilds.length > 0) {
+        for (var i = 0; i < proBuilds.length; i++) {
+          proBuildButtons.push(<li key={(i + 4)} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#1e2328'} passclick={this.handleClick} href={"#build3"}><img src={proPictures[proBuilds[i]["proname"].toLowerCase()]} /><span style={titleStyle}>Proname</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>);
+        }
+      }
+
+      tab = window.location.hash.substr(1);
+      switch (tab) {
+        case "":
+        case "build1":
+          chosenBuild = build1;
+          buildButton1 = <li key={1} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build1"}><span style={titleStyle}>Most Popular Build</span>  <br/><span style={descriptionStyle}>{runes[0]["description"]}</span></LeagueButton></li>;
+          break;
+        case "build2":
+          chosenBuild = build2;
+          buildButton2 = <li key={2} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build2"}><span style={titleStyle}>2nd Build</span>  <br/><span style={descriptionStyle}>{runes[1]["description"]}</span></LeagueButton></li>;
+          break;
+        case "build3":
+          chosenBuild = build3;
+          buildButton3 = <li key={3} style={liStyle}><LeagueButton color={'#b2d9db'} width={buttonWidth} backgroundColor={'#627487'} passclick={this.handleClick} href={"#build3"}><span style={titleStyle}>3rd Build</span>  <br/><span style={descriptionStyle}>{runes[2]["description"]}</span></LeagueButton></li>;
+          break;
+        default:
+          chosenBuild = build1;
+          break;
+      }
+
+
     }
 
     var tabContent = {
       width: '100%',
-      height: '100%'
+      height: '55vw'
     };
 
     var nav = {
@@ -1519,12 +1639,18 @@ class BuildContainer extends React.Component {
     var buildButtons = [];
     buildButtons.push(buildButton1);
     buildButtons.push(buildButton2);
-    buildButtons.push(buildButton3);
-
+    if (runes[2] !== undefined ) {
+      buildButtons.push(buildButton3);
+    }
+    if (proBuildButtons.length > 0) {
+      for (var i = 0; i < proBuildButtons; i++) {
+        buildButtons.push(proBuildButtons[i]);
+      }
+    }
 
     return (
       <div style={this.loadingContainer} className={"champbox"}>
-      <div style={this.afterl}>
+        <div style={this.afterl}>
           <ul style={nav} className="nav nav-tabs">
             {buildButtons}
           </ul>
@@ -1533,9 +1659,9 @@ class BuildContainer extends React.Component {
             {chosenBuild}
           </div>
           <BuildBottom items={items} summoners={summoners} />
-      </div>
+        </div>
 
-    </div>);
+      </div>);
   }
 }
 
@@ -1688,13 +1814,16 @@ class Build extends React.Component {
         case '8242':
           runeMain = "8400";
           break;
+        case '8410':
+          runeMain = "8300";
+          break;
         default:
           break;
 
       }
 
       var counter = 1;
-      while (ifRuneInSameTree(runeMain,firstRune,secondRune, "") === true) {
+      while (ifRuneInSameTree(runeMain,firstRune,secondRune, "") === true || getRuneType(runes[counter]) !== runeMain) {
         counter += 1;
         secondRune = runes[counter];
       }
@@ -1704,7 +1833,7 @@ class Build extends React.Component {
         var thirdRune = runes[2];
 
         counter = 2;
-        while (ifRuneInSameTree(runeMain,firstRune,secondRune, thirdRune) === true) {
+        while (ifRuneInSameTree(runeMain,firstRune,secondRune, thirdRune) === true || getRuneType(thirdRune) !== runeMain) {
           counter += 1;
           thirdRune = runes[counter];
         }
@@ -1803,12 +1932,12 @@ class Build extends React.Component {
     var svg1 = {
       marginLeft: '5%',
       marginTop: '5%',
-      height: (window.innerWidth * .4),
+      height: (document.body.clientWidth * .4),
       float: 'left'
     };
 
     var svg2 = {
-      height: (window.innerWidth * .27),
+      height: (document.body.clientWidth * .27),
       float: 'left',
       marginLeft: '5%',
       marginTop: '5%'
@@ -1822,54 +1951,80 @@ class Build extends React.Component {
       color: '#a09b8c'
     };
 
+    function sortRunes(runes, description, titles) {
+      var newRunes = [], newDescription = [], newTitles = [];
+      var mainRune = getRuneType(runes[0]);
+      for (var z = 0; z < runes.length; z++) {
+        for (var i = 0; i < runeJSON.length; i++) {
+          if (runeJSON[i]["id"].toString() === mainRune) {
+            for (var h = 0; h < runeJSON[i]["slots"].length; h++) {
+              for (var j = 0; j < runeJSON[i]["slots"][h]["runes"].length; j++) {
+                if (runeJSON[i]["slots"][h]["runes"][j]["id"].toString() === runes[z].toString()) {
+                  newRunes[(h-1)] = runes[z];
+                  newDescription[(h-1)] = description[z];
+                  newTitles[(h-1)] = titles[z];
+                }
+              }
+            }
+          }
+        }
+      }
+      return [newRunes, newDescription, newTitles];
+    }
+
+    var sorted = sortRunes(mainRunes,mainRuneDescriptions, mainRuneTitles);
+    mainRunes = sorted[0];
+    mainRuneDescriptions = sorted[1];
+    mainRuneTitles = sorted[2];
+
     return (
-        <div style={runeOuterFrame}>
-          <div style={runeInnerFrame}>
-            <div style={background}>
-              <div className={"runeBuild"}>
-                <svg style={svg1} viewBox="0 0 800 1200">
-                  <image x="0" y="0" height={"1200px"} xlinkHref={leftBackground} />
-                  <image x="45" y="40" xlinkHref={topIcon} />
-                  <image x="-42" y="228" xlinkHref={runeImages[runes["keystone"]]} />
-                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="296">{keystoneTitle}</text>
-                    <foreignObject x="230" y="316" width="520" height="220">
-                      <p style={temp}>{keystoneDescription}</p>
-                    </foreignObject>
-                  <image x="32" y="580" xlinkHref={runeImages[mainRunes[0]]} />
-                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="610">{mainRuneTitles[0]}</text>
-                    <foreignObject x="230" y="630" width="520" height="220">
-                      <p style={temp} >{mainRuneDescriptions[0]}</p>
-                    </foreignObject>
-                  <image x="32" y="834" xlinkHref={runeImages[mainRunes[1]]} />
-                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="870">{mainRuneTitles[1]}</text>
-                    <foreignObject x="230" y="890" width="520" height="220">
-                      <p style={temp} >{mainRuneDescriptions[1]}</p>
-                    </foreignObject>
-                  <image x="32" y="1085" xlinkHref={runeImages[mainRunes[2]]} />
-                    <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="1120">{mainRuneTitles[2]}</text>
-                    <foreignObject x="230" y="1140" width="520" height="220">
-                      <p style={temp} >{mainRuneDescriptions[2]}</p>
-                    </foreignObject>
-                </svg>
-                <svg style={svg2} viewBox="0 0 800 800">
-                  <image x="0" y="0" height={"680px"} xlinkHref={rightBackground} />
-                  <image x="44" y="38" xlinkHref={topIcon2} />
-                  <image x="32" y="296" xlinkHref={runeImages[subRunes[0]]} />
-                    <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="316">{subRuneTitles[0]}</text>
-                    <foreignObject x="230" y="336" width="520" height="220">
-                      <p style={temp}>{subRuneDescriptions[0]}</p>
-                    </foreignObject>
-                  <image x="32" y="568" xlinkHref={runeImages[subRunes[1]]} />
-                    <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="590">{subRuneTitles[1]}</text>
-                    <foreignObject x="230" y="610" width="520" height="220">
-                      <p style={temp}>{subRuneDescriptions[1]}</p>
-                    </foreignObject>
-                </svg>
-              </div>
+      <div style={runeOuterFrame}>
+        <div style={runeInnerFrame}>
+          <div style={background}>
+            <div className={"runeBuild"}>
+              <svg style={svg1} viewBox="0 0 800 1200">
+                <image x="0" y="0" height={"1200px"} xlinkHref={leftBackground} />
+                <image x="45" y="40" xlinkHref={topIcon} />
+                <image x="-42" y="228" xlinkHref={runeImages[runes["keystone"]]} />
+                <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="296">{keystoneTitle}</text>
+                <foreignObject x="230" y="316" width="520" height="220">
+                  <p style={temp}>{keystoneDescription}</p>
+                </foreignObject>
+                <image x="32" y="580" xlinkHref={runeImages[mainRunes[0]]} />
+                <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="610">{mainRuneTitles[0]}</text>
+                <foreignObject x="230" y="630" width="520" height="220">
+                  <p style={temp} >{mainRuneDescriptions[0]}</p>
+                </foreignObject>
+                <image x="32" y="834" xlinkHref={runeImages[mainRunes[1]]} />
+                <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="870">{mainRuneTitles[1]}</text>
+                <foreignObject x="230" y="890" width="520" height="220">
+                  <p style={temp} >{mainRuneDescriptions[1]}</p>
+                </foreignObject>
+                <image x="32" y="1085" xlinkHref={runeImages[mainRunes[2]]} />
+                <text fill={titleFillMain} fontSize="45" fontFamily="Verdana" x="210" y="1120">{mainRuneTitles[2]}</text>
+                <foreignObject x="230" y="1140" width="520" height="220">
+                  <p style={temp} >{mainRuneDescriptions[2]}</p>
+                </foreignObject>
+              </svg>
+              <svg style={svg2} viewBox="0 0 800 800">
+                <image x="0" y="0" height={"680px"} xlinkHref={rightBackground} />
+                <image x="44" y="38" xlinkHref={topIcon2} />
+                <image x="32" y="296" xlinkHref={runeImages[subRunes[0]]} />
+                <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="316">{subRuneTitles[0]}</text>
+                <foreignObject x="230" y="336" width="520" height="220">
+                  <p style={temp}>{subRuneDescriptions[0]}</p>
+                </foreignObject>
+                <image x="32" y="568" xlinkHref={runeImages[subRunes[1]]} />
+                <text fill={titleFillSub} fontSize="45" fontFamily="Verdana" x="210" y="590">{subRuneTitles[1]}</text>
+                <foreignObject x="230" y="610" width="520" height="220">
+                  <p style={temp}>{subRuneDescriptions[1]}</p>
+                </foreignObject>
+              </svg>
             </div>
           </div>
         </div>
-      );
+      </div>
+    );
   }
 }
 
@@ -1923,7 +2078,7 @@ class BuildBottom extends React.Component {
       zIndex: 0,
       position: 'relative',
       width: '100%',
-      height: '20%',
+      height: '23%',
       marginTop: '5%',
       marginBottom: '5%'
     };
@@ -1990,9 +2145,13 @@ class BuildBottom extends React.Component {
       return b[1] - a[1]
     });
 
-    for (var i = 0; i < newSummonerArray.length; i++) {
-        var tempPercent = ((newSummonerArray[i][1] / total) * 100);
-        summonerView.push(<ImageBox key={i} width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={""} summoner={[parseInt(newSummonerArray[i][0]),tempPercent]}  />);
+    var sumLength = 6;
+    if (newSummonerArray.length < sumLength) {
+      sumLength = newSummonerArray.length;
+    }
+    for (var i = 0; i < sumLength; i++) {
+      var tempPercent = ((newSummonerArray[i][1] / total) * 100);
+      summonerView.push(<ImageBox key={i} width={'4vw'} height={'4vw'} item={""} summoner={[parseInt(newSummonerArray[i][0]),tempPercent]}  />);
     }
 
     /*for (var i = 0; i < this.props.summoners.length; i++) {
@@ -2008,14 +2167,14 @@ class BuildBottom extends React.Component {
           <div style={background}>
             <div style={itemBox}>
               <h3 style={itemText}>MOST BUILT ITEMS</h3>
-                <div style={itemContainer}>
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[0][0]} />
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[1][0]} />
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[2][0]} />
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[3][0]} />
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[4][0]} />
-                    <ImageBox width={window.innerHeight * 0.0625} height={window.innerHeight * 0.0625} item={items[5][0]} />
-                 </div>
+              <div style={itemContainer}>
+                <ImageBox width={'4vw'} height={'4vw'} item={items[0][0]} />
+                <ImageBox width={'4vw'} height={'4vw'} item={items[1][0]} />
+                <ImageBox width={'4vw'} height={'4vw'} item={items[2][0]} />
+                <ImageBox width={'4vw'} height={'4vw'} item={items[3][0]} />
+                <ImageBox width={'4vw'} height={'4vw'} item={items[4][0]} />
+                <ImageBox width={'4vw'} height={'4vw'} item={items[5][0]} />
+              </div>
             </div>
             <div style={itemBox}>
               <h3 style={itemText}>MOST POPULAR SUMMONERS</h3>
@@ -2105,6 +2264,26 @@ class ImageBox extends React.Component {
   }
 }
 
+class SkillBox extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+
+    return (
+      <div style={runeOuterFrame}>
+        <div style={runeInnerFrame}>
+          <div style={background}>
+            {text}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
 class MainWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -2164,16 +2343,16 @@ class MainWrapper extends React.Component {
         <ModalChampion show={this.state.showModal} passclick={this.handleModalClose} clickedChamp={this.state.clickedChamp} />
 
         <h1 style={title_style}>counterpick.gg</h1>
-      <div style={boxTop2} className={"champbox"}>
-        <TopContainer/>
-      </div>
+        <div style={boxTop2} className={"champbox"}>
+          <TopContainer/>
+        </div>
         <div style={centertext}>
           <CenterText text={"Pick Lane to Get Counter Builds"}/>
         </div>
-      <div style={boxTop} className={"champbox"}>
-        <div style={laneBox}>
-          <LaneContainer handleClickMain={this.handleClickMain} />
-        </div>
+        <div style={boxTop} className={"champbox"}>
+          <div style={laneBox}>
+            <LaneContainer handleClickMain={this.handleClickMain} />
+          </div>
         </div>
         <BottomContainer show={this.state.showChampList} lane={this.state.pickedLane} championClick={this.handleClickChampion} />
         <BuildContainer notshow={this.state.showChampList} lane={this.state.pickedLane} champ={this.state.champ} echamp={this.state.echamp} />
@@ -2191,9 +2370,8 @@ class MainWrapper extends React.Component {
         </div> */
 
 export const championpage = () => (
-    <MainWrapper/>
+  <MainWrapper/>
 
 )
 
 export default Radium(championpage)
-

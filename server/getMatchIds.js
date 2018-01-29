@@ -1,20 +1,18 @@
 
-const pg = require('pg');
-const path = require('path');
-const db = require('../db')
 const { Client } = require('pg')
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
-const client = new Client()
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: 'stevenbarsam',
+  password: null,
+  port: 5432,
+});
 client.connect();
 
 var apikey = process.argv.slice(2)[0];
 var region = process.argv.slice(2)[1];
 
-    var https = require('https');
- 	var res;
  	var playerIdsInTable = [], matchesInTable = [];
- 	var matchesObject = {"matches": []};
-
 
  	function doTimeout(url,i,res) {
  		setTimeout(function() {

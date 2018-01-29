@@ -1,10 +1,12 @@
 
-const pg = require('pg');
-const path = require('path');
-const db = require('../db')
 const { Client } = require('pg')
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
-const client = new Client()
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: 'stevenbarsam',
+  password: null,
+  port: 5432,
+});
 client.connect();
 
 var apikey = process.argv.slice(2)[0];
@@ -157,6 +159,7 @@ var request = require('request');
                   }
 
                   var gameid = res["gameId"];
+                  var participantId = res["participantIdentities"][z]["participantId"];
                   var championId = res["participants"][z]["championId"];
                   var recentSum1Id = res["participants"][z]["spell1Id"];
                   var recentSum2Id = res["participants"][z]["spell2Id"];
@@ -182,10 +185,10 @@ var request = require('request');
                     proName = playerProNames[index];
                   }
 
-                  var values = [championId,echampion,lane,win,recentSum1Id,recentSum2Id,JSON.stringify(recentRunes),JSON.stringify(recentMasteries),item1,item2,item3,item4,item5,item6,gameid,time,proName];
+                  var values = [championId,echampion,lane,win,recentSum1Id,recentSum2Id,JSON.stringify(recentRunes),JSON.stringify(recentMasteries),item1,item2,item3,item4,item5,item6,gameid,time,proName, participantId, region];
                   var queryString;
                   /*if (win == true) {*/
-                  queryString = "INSERT INTO matchdata (championid,echampionid,lane,win,summoner1,summoner2,runes,masteries,item1id,item2id,item3id,item4id,item5id,item6id,gameid,timeadded,proname) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,to_timestamp($16),$17)";
+                  queryString = "INSERT INTO matchdata (championid,echampionid,lane,win,summoner1,summoner2,runes,masteries,item1id,item2id,item3id,item4id,item5id,item6id,gameid,timeadded,proname, participantid, region) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,to_timestamp($16),$17, $18, $19)";
                   /*} else {
                       queryString = "INSERT " + lane + " SET item1Vs" + echampion + "=array_append(item1Vs" + echampion + ",$2), item2Vs"+ echampion + "=array_append(item2Vs" + echampion +",$3), item3Vs"+ echampion + "=array_append(item3Vs" + echampion +",$4), lossesVs" + echampion + "=$5 WHERE id=$1";
                   }*/

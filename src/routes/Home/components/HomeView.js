@@ -4,7 +4,6 @@ import './HomeView.scss'
 import background from './background.jpg'
 import WebFont from 'webfontloader'
 
-
 var Radium = require('radium');
 var color = require('color');
 
@@ -28,6 +27,8 @@ WebFont.load({
     families: ['Monoton', 'EB Garamond', 'Teko:300,400,700', 'sans-serif']
   }
 });
+
+document.title = "Counterpick.GG";
 
 var font = 'Roboto';
 var font2 = 'EB Garamond';
@@ -217,66 +218,77 @@ class CenterText extends React.Component {
 
 class Champion extends React.Component {
   constructor(props) {
-  		super(props);
-  		this.championid = this.props.championid;
-  		this.championkey = this.props.championkey + ".png";
-  		switch (this.championkey) {
-  			case "Kayn.png":
-  				this.championkey = "https://i.imgur.com/QhlNJWg.png"
-  				break
-  			case "Ornn.png":
-  				this.championkey = "https://i.imgur.com/yk8lBP2.png"
-  				break
-  			default:
-  				this.championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/" + this.championkey;
-  		}
-  		this.championname = this.props.championkey;
-  		switch (this.championname) {
-        case 'AurelionSol':
-          this.championname = "Aurelion Sol"
-              break
-        case 'KogMaw':
-          this.championname = "Kog'Maw"
-              break
-        case 'MissFortune':
-          this.championname = "Miss Fortune"
-              break
-        case 'DrMundo':
-          this.championname = "Dr. Mundo"
-          break
-        case 'JarvanIV':
-          this.championname = "Jarvan IV"
-          break
-        case 'XinZhao':
-          this.championname = "Xin Zhao"
-          break
-        case 'MasterYi':
-          this.championname = "Master Yi"
-          break
-        case 'MonkeyKing':
-          this.championname = "Wukong"
-          break
-        case 'TwistedFate':
-          this.championname = "Twisted Fate"
-          break
-      }
+    super(props);
+    this.championid = this.props.championid;
+    this.championkey = this.props.championkey + ".png";
+    switch (this.championkey) {
+      case "Kayn.png":
+        this.championkey = "https://i.imgur.com/QhlNJWg.png"
+        break
+      case "Ornn.png":
+        this.championkey = "https://i.imgur.com/yk8lBP2.png"
+        break
+      default:
+        this.championkey = "https://ddragon.leagueoflegends.com/cdn/7.24.2/img/champion/" + this.championkey;
+    }
+    this.championname = this.props.championkey;
+    switch (this.championname) {
+      case 'AurelionSol':
+        this.championname = "Aurelion Sol"
+        break
+      case 'KogMaw':
+        this.championname = "Kog'Maw"
+        break
+      case 'MissFortune':
+        this.championname = "Miss Fortune"
+        break
+      case 'DrMundo':
+        this.championname = "Dr. Mundo"
+        break
+      case 'JarvanIV':
+        this.championname = "Jarvan IV"
+        break
+      case 'XinZhao':
+        this.championname = "Xin Zhao"
+        break
+      case 'MasterYi':
+        this.championname = "Master Yi"
+        break
+      case 'MonkeyKing':
+        this.championname = "Wukong"
+        break
+      case 'TwistedFate':
+        this.championname = "Twisted Fate"
+        break
+    }
 
-  		this.championimg = this.championkey;
-	}
+    this.championimg = this.championkey;
+  }
+
+  resize = () => this.forceUpdate()
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resize)
+  }
+
 
   render() {
-  	var style = {
-      height:60,
+    var style = {
       width:60
     };
-  	var divStyle = {
+    var divStyle = {
       margin: 20,
       display:'inline-block'
     };
-  	var textStyle = {
-  	  color: 'white',
+    var textStyle = {
+      color: 'white',
       paddingTop:'4px',
-      fontFamily:'Teko'
+      fontFamily:'Teko',
+
     };
     var champ = '/' + this.props.championkey;
     var buttonStyle = {
@@ -284,16 +296,20 @@ class Champion extends React.Component {
       backgroundColor: 'transparent',
       padding: '0px'
     };
+    if (window.innerWidth > 1500) {
+      style["width"] = '4.5vw'
+      textStyle["fontSize"] = '1.2vw'
+    }
 
     return (
       <div style={divStyle}>
-      <a href={champ}>
-        <button style={buttonStyle}>
-          <img style={style} src={this.championimg} />
-          <p style={textStyle}>{this.championname}</p>
-        </button>
-      </a>
-    </div>);
+        <a href={champ}>
+          <button style={buttonStyle}>
+            <img style={style} src={this.championimg} />
+            <p style={textStyle}>{this.championname}</p>
+          </button>
+        </a>
+      </div>);
   }
 }
 
@@ -349,11 +365,24 @@ class MainWrapper extends React.Component {
         <img style={frontImgStyle} src={"https://i.imgur.com/13zKD6w.png"}/>
         <div className={"fadeInUp"}>
           <div style={centertext}>
-            <CenterText text={"Pick the Champion to Play!"}/>
+            <CenterText text={"Pick a Champion to Get a Custom Build!"}/>
           </div>
           <div style={champbox} className={["champbox"].join(' ')}>
             <ChampionContainer/>
           </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div style={centertext}>
+          <CenterText text={"FAQ / How It Works"}/>
+        </div>
+        <div style={champbox} className={["champbox"].join(' ')}>
+          <h1>The TLDR:</h1>
+          <p>Counterpick.gg takes millions of games played from Diamond through Challenger, and compiles the best build using that data for every character matchup per lane.</p>
+          <p>For example, it will take the 200+ Anivia vs. Katarina matches, finds the games where Anivia won, the compiles the highest percentage rune builds, item builds, and summoner builds.</p>
+          <p>So instead of getting a general build for all matchups, this gives ones tailored to your exact match :D</p>
         </div>
       </div>
     );
@@ -366,4 +395,3 @@ export const HomeView = () => (
 )
 
 export default HomeView
-

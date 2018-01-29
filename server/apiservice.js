@@ -4,7 +4,13 @@ const path = require('path');
 const db = require('../db');
 const { Client } = require('pg');
 const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
-const client = new Client();
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: 'stevenbarsam',
+  password: null,
+  port: 5432,
+});
 const runes = "../league_data/runes.json";
 client.connect();
 
@@ -54,7 +60,7 @@ function topInArray(arr) {
 
 module.exports = {
 	getChampionWinRatesVs: function (championid, echampionid, lane, numreturn, lanereturn, namereturn, callback) {
- 	var winslosses = [], proname = [], rune1 = [], rune2 = [], rune3 = [], rune4 = [], rune5 = [], rune0 = [], item0 = [], item1 = [], item2 = [], item3 = [], item4 = [], item5 = [], summoner1 = [], summoner2 = [];
+ 	var winslosses = [], timeline = [] , proname = [], rune1 = [], rune2 = [], rune3 = [], rune4 = [], rune5 = [], rune0 = [], item0 = [], item1 = [], item2 = [], item3 = [], item4 = [], item5 = [], summoner1 = [], summoner2 = [];
     var query = 'select * from matchdata where championid=' + championid + ' AND echampionid=' + echampionid + " AND lane='" + lane + "'";
 
      client.query(query, (err, res) => {
@@ -78,12 +84,13 @@ module.exports = {
                       rune4.push(res.rows[i]["runes"][4]);
                       rune5.push(res.rows[i]["runes"][5]);
                       proname.push(res.rows[i]["proname"]);
+                      timeline.push(res.rows[i]["timeline"]);
                     }
 
                     var proBuilds = [];
 
                     for (var i = 0; i < proname.length; i++) {
-                      if (proname[i] !== undefined && proname[i] !== "") {
+                      if (proname[i] !== undefined && proname[i] !== "" && rune0[i] !== null) {
                         var probuild = {
                           win: winslosses[i],
                           item0: item0[i],
@@ -100,7 +107,8 @@ module.exports = {
                           rune3: rune3[i],
                           rune4: rune4[i],
                           rune5: rune5[i],
-                          proname: proname[i]
+                          proname: proname[i],
+                          timeline: timeline[i]
                         };
                         proBuilds.push(probuild);
                       }

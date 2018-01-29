@@ -7,7 +7,13 @@ const project = require('../project.config')
 const compress = require('compression')
 
 const { Client } = require('pg')
-const client = new Client();
+const client = new Client({
+  user: process.env.USER,
+  host: 'localhost',
+  database: 'stevenbarsam',
+  password: null,
+  port: 5432,
+});
 client.connect();
 
 // Run
